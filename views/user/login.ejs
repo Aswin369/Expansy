@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-section">
+          <div class="logo"> 
+            <img src="/images/BrandName.png" alt="Expansy"> <!-- Add your logo image here -->
+            <!-- <h1>FRESH STORE</h1> -->
+          </div>
+      
+          <h2>Your Smart Choice Begins Here!</h2>
+          <a href="auth/google" style="text-decoration: none;" class="google-btn">
+            <img src="/images/google-logo.png" alt="Google Icon"> <!-- Add a Google icon here -->
+            Log in with Google
+          </a>
+          <p class="or">Or use Email</p>
+          
+          <form method="post" action="/login">
+            <div class="input-group">
+              <label for="email">EMAIL</label>
+              <input type="email" name="email" id="email"  required>
+            </div>
+            <div class="input-group">
+              <label for="password">PASSWORD</label>
+              <div class="password-container ">
+                <input type="password" name="password" id="password"  required>
+                <span id="toggle-password" style="cursor: pointer; position: absolute; right: 10px; top: 57%; transform: translateY(-50%);">
+                  <img id="password-eye" src="images/hide (1).png" alt="Show Password" width="20" height="20" />
+                </span>
+              </div>
+              <%if(locals.message && message.length>0){%>
+                <div class="text-danger text-center">
+                  <%=message%>
+                </div>
+              <%}%>
+            </div>
+            <a href="/forgot-password" class="forgot-password"><p>forgot password?</p></a>
+            <button type="submit" class="continue-btn">LOGIN</button>
+          </form>
+          <p class="newbie">Do you have an account? <a href="/signup">GET STARTED</a></p>
+        </div>
+        
+        <div class="image-section">
+          <img src="/images/online-registration-sign-up-concept-with-man-character_268404-98.jpg" alt="Vegetables"> <!-- Add your vegetable image here -->
+        </div>
+      </div>
+      <script>
+          const passid = document.getElementById("password");
+          const passwordEyeIcon = document.getElementById("password-eye");
+          const togglePasswordButton = document.getElementById("toggle-password");
+
+          document.addEventListener("DOMContentLoaded",()=>{
+            togglePasswordButton.addEventListener("click", () => {
+          const type = passid.type === "password" ? "text" : "password";
+          passid.type = type;
+          passwordEyeIcon.src = type === "password" ? "images/hide (1).png" : "images/unhide.png";
+        })
+          })
+        
+      </script>
+</body>
+</html>

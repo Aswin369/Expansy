@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>About</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/linearicons-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+<!--===============================================================================================-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<style>
+    .order-status {
+        background-color: #e7f7e7;
+        color: #0a880a;
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-weight: 600;
+        display: inline-block;
+    }
+    .pending-status {
+        background-color: #fff8e6;
+        color: #d68300;
+    }
+    .order-card {
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        background-color: #fff;
+        overflow: hidden;
+    }
+    .order-header {
+        border-bottom: 1px solid #eaeaea;
+        padding: 20px 25px;
+    }
+    .payment-alert {
+        background-color: #f0f7ff;
+        border-left: 4px solid #0d6efd;
+    }
+    .order-items {
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+    .product-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+    }
+    .product-image {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        border-radius: 4px;
+    }
+    .cancel-btn {
+        background-color: #ff3a3a;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 16px;
+    }
+    .cancel-btn:hover {
+        background-color: #e42f2f;
+    }
+    .summary-box {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 20px;
+    }
+    .download-btn {
+        background-color: #4a4a4a;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+    }
+    .download-btn:hover {
+        background-color: #2d2d2d;
+    }
+    .back-btn {
+        color: #555;
+        font-weight: 500;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body class="animsition">
+	
+	<!-- Header -->
+	<header class="header-v4">
+		<!-- Header desktop -->
+		<div class="container-menu-desktop">
+			<!-- Topbar -->
+			<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop container">
+					
+					<!-- Logo desktop -->		
+					<a href="#" class="logo">
+						<img src="/images/BrandName.png" alt="IMG-LOGO">
+					</a>
+		
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li class="active-menu">
+								<a href="/">Home</a>
+								
+							</li>
+		
+							<li>
+								<a href="/shop">Shop</a>
+							</li>
+		
+							<li class="label1">
+								<a href="/">About Us</a>
+							</li>
+		
+							<li>
+								<a href="/">Contact</a>
+							</li>
+							<li>
+								<a href="/profile">Profile</a>
+							</li>
+							<li>
+								<% if (user) { %>
+									<a onclick="handleLogout()" href="/logout">Logout</a>
+								<% } else { %>
+									<a href="/login">Login</a>
+								<% } %>
+							</li>
+							
+                            
+						</ul>
+					</div>	
+		
+					<!-- Icon header -->
+					<div class="wrap-icon-header flex-w flex-r-m">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+							<i class="zmdi zmdi-search"></i>
+						</div>
+		
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+							<a href="/shoppingCart"><i class="zmdi zmdi-shopping-cart" style="color: black;"></i></a>
+						</div>
+						<a href="/getWhishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a>
+					</div>
+				</nav>
+			</div>
+		</div>
+
+		<!-- Header Mobile -->
+		<div class="wrap-header-mobile">
+			<!-- Logo moblie -->		
+			<div class="logo-mobile">
+				<a href="index.html"><img src="/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+			</div>
+
+			<!-- Icon header -->
+			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+					<i class="zmdi zmdi-search"></i>
+				</div>
+
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+					<i class="zmdi zmdi-shopping-cart"></i>
+				</div>
+
+				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+					<i class="zmdi zmdi-favorite-outline"></i>
+				</a>
+			</div>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+				<span class="hamburger-box">
+					<span class="hamburger-inner"></span>
+				</span>
+			</div>
+		</div>
+
+
+		<!-- Menu Mobile -->
+		<div class="menu-mobile">
+			<ul class="topbar-mobile">
+				<li>
+					<div class="left-top-bar">
+						Free shipping for standard order over $100
+					</div>
+				</li>
+
+				<li>
+					<div class="right-top-bar flex-w h-full">
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							Help & FAQs
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							My Account
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							EN
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							USD
+						</a>
+					</div>
+				</li>
+			</ul>
+
+			<ul class="main-menu-m">
+				<li>
+					<a href="index.html">Home</a>
+					<ul class="sub-menu-m">
+						<li><a href="index.html">Homepage 1</a></li>
+						<li><a href="home-02.html">Homepage 2</a></li>
+						<li><a href="home-03.html">Homepage 3</a></li>
+					</ul>
+					<span class="arrow-main-menu-m">
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</span>
+				</li>
+
+				<li>
+					<a href="product.html">Shop</a>
+				</li>
+
+				<li>
+					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+				</li>
+
+				<li>
+					<a href="blog.html">Blog</a>
+				</li>
+
+				<li>
+					<a href="about.html">About</a>
+				</li>
+
+				<li>
+					<a href="contact.html">Contact</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- Modal Search -->
+		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<div class="container-search-header">
+				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+					<img src="/images/icons/icon-close2.png" alt="CLOSE">
+				</button>
+
+				<form class="wrap-search-header flex-w p-l-15">
+					<button class="flex-c-m trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+					<input class="plh3" type="text" name="search" placeholder="Search...">
+				</form>
+			</div>
+		</div>
+	</header>
+
+	<!-- Cart -->
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Your Cart
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="/images/item-cart-01.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="/images/item-cart-02.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Converse All Star
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $39.00
+							</span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="/images/item-cart-03.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Nixon Porter Leather
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $17.00
+							</span>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						Total: $75.00
+					</div>
+
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<section class="bg-light">
+        <div class="container py-5">
+            <div class="order-card mb-5">
+                <!-- Order Header -->
+				<div class="order-header d-flex justify-content-between align-items-center">
+					<div>
+						<h1 class="fs-30 fw-bold mb-0">Order Details</h1>
+						<div class="order-status pending-status mt-2"><%= orderData.status %></div>
+					</div>
+					<input type="hidden" id="OrderIdVal" value="<%= orderData._id %>">
+					<div class="col-md-2 text-end">
+						<button class="cancel-btn" id="cancelOrder" 
+							<%= orderData.status === "Cancelled" ? "disabled" : "" || orderData.paymentStatus === "pending" ? "disabled" : ""%>>
+							Cancel Order
+						</button>
+					</div>
+				</div>
+				
+    
+                <!-- Payment Alert -->
+				
+                <button class="payment-alert p-3 m-3 d-flex align-items-center border border-primary rounded"
+				
+					onclick="continuePayment('<%= orderData._id %>', '<%= orderData.payableAmount %>')"
+					<%= orderData.paymentStatus === 'pending' ? '' : 'disabled' %>>
+					<i class="bi bi-exclamation-circle text-primary me-2"></i>
+					<span>Continue Payment</span>
+				</button>
+				
+                <!-- Order Info -->
+                <div class="p-4 bg-white">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <p class="mb-2"><span class="fw-bold">Order Id : </span><%= orderData.orderId%></p>
+                            <p class="mb-2"><span class="fw-bold">Order Date : </span><%= orderData.createdAt.toLocaleString()%></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-2"><span class="fw-bold">Payment Method : </span><%= orderData.paymentMethod%></p>
+                            <p class="mb-2"><span class="fw-bold">Payment Status : </span><%= orderData.paymentStatus%></p>
+                        </div>
+                    </div>
+    
+                    <!-- Order Items -->
+                    <div class="order-items p-3 mb-4">
+                        <h2 class="fs-30 text-warning mb-4">Order Items</h2>
+                        
+                        <!-- Product 1 -->
+                        <% orderData.products.forEach(product => { %>
+							<div class="product-card p-3">
+								<div class="row align-items-center">
+									<div class="col-md-2">
+										<img src="<%= product.productId.productImage[0] || 'https://via.placeholder.com/80' %>" alt="Product" class="product-image">
+									</div>
+									<div class="col-md-4">
+										<h3 class="fs-15 fw-bold"><%= product.productId.productName %></h3>
+										<div class="badge bg-success"><%= product.status %></div>
+									</div>
+									
+									
+									<div class="col-md-4">
+										<p class="mb-1">Quantity: <%= product.quantity %></p>
+										<p class="mb-1">Unit Price: ₹<%= product.price.toLocaleString() %></p>
+										<p class="fw-bold">Total Price: ₹<%= product.totalPrice.toLocaleString() %></p>
+									</div>
+									<div class="col-md-2 text-end d-flex flex-column align-items-end gap-2">
+										<button 
+										  class="cancel-btn btn btn-danger w-100"
+										  onclick="cancelOrder(
+											'<%= product.productId._id %>', 
+											'<%= orderData._id %>', 
+											'<%= product.specId %>', 
+											'<%= product.quantity %>', 
+											'<%= product._id %>', 
+											'<%= product.totalPrice %>', 
+											'<%= orderData.userId %>'
+										  )" 
+										  <%= product.status === "Cancelled" || product.status === "Return Requested" ? "disabled" : "" || product.status === "Return Approved" ? "disabled" : "" || orderData.status === "Delivered" ? "disabled" : "" || orderData.status === "Cancelled" ? "disabled" : "" || orderData.paymentStatus === "pending" ? "disabled" : ""%>
+										>
+										  Cancel
+										</button>
+									  
+										<% if (orderData.status === "Delivered") { %>
+										  <button 
+											class="return-btn btn btn-success w-100"
+											onclick="returnRequest(
+											  '<%= product.productId._id %>', 
+											  '<%= orderData._id %>', 
+											  '<%= product.specId %>', 
+											  '<%= product.quantity %>', 
+											  '<%= product._id %>', 
+											  '<%= product.totalPrice %>', 
+											  '<%= orderData.userId %>'
+											)"
+											<%= product.status === "Cancelled" || product.status === "Return Requested" ? "disabled" : "" || product.status === "Return Approved" ? "disabled" : "" || product.status === "Return Rejected" ? "disabled" : ""%>
+										  >
+											Return Request
+										  </button>
+										<% } %>
+									  </div>
+									
+								</div>
+							</div>
+						<% }) %>
+						
+                        
+                       
+    
+                    <!-- Shipping Information -->
+                    <div class="mb-4">
+                        <h2 class="fs-26 fw-bold mb-3">Shipping Information</h2>
+                        <p class="mb-2"><span class="fw-bold">Shipping Address : </span><%= orderData.deliveryAddress.addressType%></p>
+                        <p class="mb-2"><span class="fw-bold">City : </span><%= orderData.deliveryAddress.city%></p>
+                        <p class="mb-2"><span class="fw-bold">landMark : </span><%= orderData.deliveryAddress.landMark%></p>
+                        <p class="mb-2"><span class="fw-bold">state : </span><%= orderData.deliveryAddress.state%></p>
+                        <p class="mb-2"><span class="fw-bold">pincode : </span><%= orderData.deliveryAddress.pincode%></p>
+                        <p class="mb-2"><span class="fw-bold">phone: </span><%= orderData.deliveryAddress.phone%></p>
+                        <p class="mb-2"><span class="fw-bold">altPhone: </span><%= orderData.deliveryAddress.altPhone%></p>
+                    </div>
+    
+                    <!-- Order Summary -->
+                    <div class="summary-box">
+                        <h2 class="fs-26 fw-bold mb-3">Order Summary</h2>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal</span>
+                            <span>₹<%= (orderData.payableAmount + orderData.offerAndCouponAmount).toLocaleString()%></span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Total Discount</span>
+                            <span>₹<%= orderData.offerAndCouponAmount.toLocaleString()%></span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Shipping Charge</span>
+                            <span>₹ <%= orderData.shippingCharge%></span>
+                        </div>
+                        <div class="d-flex justify-content-between fw-bold fs-26">
+                            <span>Total Amount</span>
+                            <span>₹<%= orderData.payableAmount.toLocaleString()%></span>
+                        </div>
+						
+						<input type="hidden" id="totalAmountPrice" value="<%= orderData.payableAmount%>">
+                    </div>
+    
+                    <!-- Actions -->
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="/profile" class="back-btn">
+                            <i class="bi bi-arrow-left me-1"></i> Back to Orders
+                        </a>
+                        <button class="download-btn">
+                            <i class="bi bi-file-earmark-text me-2"></i>Download Invoice
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </section>
+    
+	
+	
+		
+
+	<!-- Footer -->
+	<footer class="bg3 p-t-75 p-b-32">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Categories
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Women
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Men
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shoes
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Watches
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Help
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Track Order
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Returns 
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shipping
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								FAQs
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						GET IN TOUCH
+					</h4>
+
+					<p class="stext-107 cl7 size-201">
+						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+					</p>
+
+					<div class="p-t-27">
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-instagram"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-pinterest-p"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Newsletter
+					</h4>
+
+					<form>
+						<div class="wrap-input1 w-full p-b-4">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+							<div class="focus-input1 trans-04"></div>
+						</div>
+
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+								Subscribe
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="p-t-40">
+				<div class="flex-c-m flex-w p-b-18">
+					<a href="#" class="m-all-1">
+						<img src="/images/icons/icon-pay-01.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="/images/icons/icon-pay-02.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="/images/icons/icon-pay-03.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="/images/icons/icon-pay-04.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="/images/icons/icon-pay-05.png" alt="ICON-PAY">
+					</a>
+				</div>
+
+				<p class="stext-107 cl6 txt-center">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+				</p>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!--===============================================================================================-->	
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="/js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	<script>
+	function cancelOrder(productId, orderId, specId, quantity, id, amount, userId) {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Do you want to cancel this order?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, cancel it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Prompt for cancellation reason
+      Swal.fire({
+        title: 'Please provide a reason',
+        input: 'textarea',
+        inputLabel: 'Reason for cancellation',
+        inputPlaceholder: 'Type your reason here...',
+        inputAttributes: {
+          'aria-label': 'Type your reason here',
+          'required': 'required'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        showLoaderOnConfirm: true,
+        preConfirm: (reason) => {
+          if (!reason.trim()) {
+            Swal.showValidationMessage('Please enter a reason');
+            return false;
+          }
+          return reason;
+        }
+      }).then((reasonResult) => {
+        if (reasonResult.isConfirmed) {
+          // Send cancellation request with reason as query parameter
+          fetch(`/deleteOrder?orderId=${orderId}&productId=${productId}&specId=${specId}&quantity=${quantity}&id=${id}&amount=${amount}&userId=${userId}&reason=${encodeURIComponent(reasonResult.value)}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            credentials: 'same-origin',
+            redirect: 'follow'
+          })
+          .then(response => {
+            // Check if response is a redirect
+            if (response.redirected) {
+              window.location.href = response.url;
+              return;
+            }
+            
+            if (!response.ok) {
+              throw new Error('Server error');
+            }
+            return response.json();
+          })
+          .then(data => {
+            // Only handle JSON response if we didn't redirect
+            if (data && data.success) {
+              Swal.fire({
+                title: 'Cancelled!',
+                text: 'Order item has been cancelled successfully',
+                icon: 'success',
+                confirmButtonColor: '#3085d6'
+              }).then(() => {
+                window.location.reload();
+              });
+            }
+          })
+          .catch(error => {
+            // Don't show error if we successfully redirected
+            if (!window.location.href.includes('/profile')) {
+              console.error('Error:', error);
+              Swal.fire({
+                title: 'Error!',
+                text: 'Something went wrong while cancelling the order',
+                icon: 'error',
+                confirmButtonColor: '#d33'
+              }).then(() => {
+                window.location.href = '/pagerror';
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+}
+
+// Return Request function
+function returnRequest(productId, orderId, specId, quantity, id, amount, userId) {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Do you want to request a return for this order?",
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, request return!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Prompt for return reason
+      Swal.fire({
+        title: 'Please provide a reason',
+        input: 'textarea',
+        inputLabel: 'Reason for return request',
+        inputPlaceholder: 'Type your reason here...',
+        inputAttributes: {
+          'aria-label': 'Type your reason here',
+          'required': 'required'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        showLoaderOnConfirm: true,
+        preConfirm: (reason) => {
+          if (!reason.trim()) {
+            Swal.showValidationMessage('Please enter a reason');
+            return false;
+          }
+          return reason;
+        }
+      }).then((reasonResult) => {
+        if (reasonResult.isConfirmed) {
+          // Send return request with reason as query parameter
+          fetch(`/returnRequest?orderId=${orderId}&productId=${productId}&specId=${specId}&quantity=${quantity}&id=${id}&amount=${amount}&userId=${userId}&reason=${encodeURIComponent(reasonResult.value)}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            credentials: 'same-origin',
+            redirect: 'follow'
+          })
+          .then(response => {
+            // Check if response is a redirect
+            if (response.redirected) {
+              window.location.href = response.url;
+              return;
+            }
+            
+            if (!response.ok) {
+              throw new Error('Server error');
+            }
+            return response.json();
+          })
+          .then(data => {
+            // Only handle JSON response if we didn't redirect
+            if (data && data.success) {
+              Swal.fire({
+                title: 'Return Requested!',
+                text: 'Return request has been submitted successfully',
+                icon: 'success',
+                confirmButtonColor: '#3085d6'
+              }).then(() => {
+                window.location.reload();
+              });
+            }
+          })
+          .catch(error => {
+            // Don't show error if we successfully redirected
+            if (!window.location.href.includes('/profile')) {
+              console.error('Error:', error);
+              Swal.fire({
+                title: 'Error!',
+                text: 'Something went wrong while submitting return request',
+                icon: 'error',
+                confirmButtonColor: '#d33'
+              }).then(() => {
+                window.location.href = '/pagerror';
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+}
+		</script>
+		<script>
+			async function handleLogout() {
+				try {
+					const response = await fetch("/logout",{
+						method: "GET",
+						credentials: "include"
+					})
+					if(response.ok){
+						console.log("Successfully logged out")
+						window.location.href = "/login"
+					}else{
+						const result = await response.json()
+						alert(result.message || "Failed to logout. Please try again")
+					}
+				} catch (error) {
+					alert("An unexpected error occurred")
+					console.log("Error in handleLogout",error)
+				}
+			}
+		</script>
+
+		<script>
+			
+			document.querySelector('#cancelOrder').addEventListener('click', function() {
+				const orderIdElement = document.getElementById("OrderIdVal");
+				if (!orderIdElement || !orderIdElement.value) {
+					console.error("Order ID not found!");
+					swal("Error", "Order ID is missing!", "error");
+					return;
+				}
+				
+				let totalAmountPrice = document.getElementById("totalAmountPrice").value
+				const orderId = orderIdElement.value; // Get Order ID
+				console.log("Cancelling Order ID:", orderId);
+				console.log("hgfgfc", totalAmountPrice);
+				
+    // Show confirmation popup with reason input
+    swal({
+        title: "Cancel Order",
+        text: "Do you really want to cancel this order?",
+        content: {
+            element: "textarea",
+            attributes: {
+                placeholder: "Please provide a reason for cancellation",
+                style: "display: block; width: 100%; padding: 8px; margin-top: 10px; border: 1px solid #ddd; border-radius: 4px;"
+            },
+        },
+        icon: "warning",
+        buttons: ["No, keep my order", "Yes, cancel it"],
+        dangerMode: true,
+    }).then((willCancel) => {
+        if (willCancel) {
+			
+            const reasonInput = document.querySelector(".swal-content textarea");
+            const cancellationReason = reasonInput ? reasonInput.value.trim() : "";
+            console.log("asdfjkh",cancellationReason)
+            if (!cancellationReason) {
+                swal("Warning", "Please provide a reason for cancellation", "warning");
+                return;
+            }
+            
+            cancelOrder1(orderId, cancellationReason, totalAmountPrice);
+        }
+    });
+});
+
+function cancelOrder1(orderId, reason, totalAmountPrice ) {
+    fetch('/cancelOrder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            orderId: orderId,
+            reason: reason ,
+			totalAmountPrice
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            swal("Cancelled!", "Your order has been cancelled successfully.", "success")
+            .then(() => { location.reload(); }); // Reload the page after success
+        } else {
+            swal("Error!", data.message || "Failed to cancel your order.", "error");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        swal("Error!", "Failed to cancel your order. Please try again.", "error");
+    });
+}
+
+		</script>
+
+
+
+<script>
+	// Add this script to your order details page
+	document.addEventListener('DOMContentLoaded', function() {
+    const downloadInvoiceBtn = document.querySelector('.download-btn');
+    
+    if (downloadInvoiceBtn) {
+        downloadInvoiceBtn.addEventListener('click', function() {
+            const orderId = document.getElementById('OrderIdVal').value;
+            window.location.href = `/invoice/${orderId}`;
+        });
+    }
+});
+</script>
+
+<script>
+    function continuePayment(orderId, amount) {
+		
+		console.log("amount",amount)
+		const amountInPaise = Math.round(amount * 100);
+
+
+        fetch("/orderDetailPageRazopay", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ orderId, amount : amountInPaise }),
+        })
+        .then(response => response.json())
+        .then(data => {
+			console.log("kjsdhf", data)
+            var options = {
+                key: "rzp_test_Ar7OJGh05M40uW", // Replace with your Razorpay API key
+                amount: data.amount, // Amount in paisa
+                currency: "INR",
+                name: "E-Commerce",
+                description: "Continue your payment",
+                order_id: data.id, // Order ID from backend
+                handler: function (response) {
+                    // Call backend to verify payment
+                  console.log('ivide ethi', options)
+					console.log(response)
+                    fetch("/orderVerifyPayment", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ 
+                            orderId: orderId, 
+                            paymentId: response.razorpay_payment_id, 
+                            razorpayOrderId: response.razorpay_order_id,
+                            signature: response.razorpay_signature
+                        }),
+                    })
+                    .then(res => res.json())
+                    .then(result => {
+						console.log(result)
+                        if (result.success) {
+                        Swal.fire({
+                            title: "Payment Successful!",
+                            text: "Your order has been processed successfully.",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        }).then(() => {
+                            window.location.reload(); // Refresh the page
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Payment Failed!",
+                            text: "There was an issue processing your payment. Please try again.",
+                            icon: "error",
+                            confirmButtonText: "Try Again"
+                        });
+                    }
+                    });
+                },
+                prefill: {
+                    name: "Aswin", // You can replace with user name
+                    email: "user@example.com",
+                    contact: "9876543210",
+                },
+                theme: { color: "#3399cc" },
+            };
+			console.log("sdfghjk")
+            const razorpayCheckout = new Razorpay(options);
+      		razorpayCheckout.open();
+        });
+    }
+</script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+</body>
+</html>

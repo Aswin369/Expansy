@@ -1,0 +1,174 @@
+<div class="main-nav">
+    <!-- Sidebar Logo -->
+    <div class="logo-box">
+         <a href="index.html" class="logo-dark">
+              <img src="/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
+              <img src="/assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
+         </a>
+
+         
+    </div>
+
+    <!-- Menu Toggle Button (sm-hover) -->
+    <button type="button" class="button-sm-hover" aria-label="Show Full Sidebar">
+         <iconify-icon icon="solar:double-alt-arrow-right-bold-duotone" class="button-sm-hover-icon"></iconify-icon>
+    </button>
+
+    <div class="scrollbar" data-simplebar>
+         <ul class="navbar-nav" id="navbar-nav">
+
+              <li class="menu-title">General</li>
+
+              <li class="nav-item">
+                   <a class="nav-link" href="/admin">
+                        <span class="nav-icon">
+                             <iconify-icon icon="solar:widget-5-bold-duotone"></iconify-icon>
+                        </span>
+                        <span class="nav-text"> Dashboard </span>
+                   </a>
+              </li>
+
+              <li class="nav-item">
+                   <a class="nav-link " href="/admin/products" >
+                        <span class="nav-icon">
+                             <iconify-icon icon="solar:t-shirt-bold-duotone"></iconify-icon>
+                        </span>
+                        <span class="nav-text"> Products </span>
+                   </a>
+                   
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/category">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:clipboard-list-bold-duotone"></iconify-icon>
+                    </span>
+                    <span class="nav-text">Category</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                   <a class="nav-link" href="/admin/brands">
+                        <span class="nav-icon">
+                             <iconify-icon icon="solar:box-bold-duotone"></iconify-icon>
+                        </span>
+                        <span class="nav-text">Brands</span>
+                   </a>
+              </li>
+
+              <li class="nav-item">
+                   <a class="nav-link" href="/admin/getOrderPage">
+                        <span class="nav-icon">
+                             <iconify-icon icon="solar:bag-smile-bold-duotone"></iconify-icon>
+                        </span>
+                        <span class="nav-text"> Orders </span>
+                   </a>
+                   
+              </li>
+
+              <li class="nav-item">
+                   <a class="nav-link" href="/admin/getOfferList" >
+                        <span class="nav-icon">
+                             <iconify-icon icon="solar:card-send-bold-duotone"></iconify-icon>
+                        </span>
+                        <span class="nav-text">Offers</span>
+                   </a>
+                   
+              </li>
+
+              <li class="nav-item">
+                   <a class="nav-link" href="/admin/getVariant">
+                        <span class="nav-icon">
+                             <iconify-icon icon="solar:confetti-minimalistic-bold-duotone"></iconify-icon>
+                        </span>
+                        <span class="nav-text"> Variants</span>
+                   </a>
+                   
+              </li>
+
+              <li class="nav-item">
+                   <a class="nav-link " href="/admin/getCouponList" >
+                        <span class="nav-icon">
+                             <iconify-icon icon="solar:bill-list-bold-duotone"></iconify-icon>
+                        </span>
+                        <span class="nav-text"> Coupons </span>
+                   </a>
+                   <div class="collapse" id="sidebarInvoice">
+                        <ul class="nav sub-navbar-nav">
+                             <li class="sub-nav-item">
+                                  <a class="sub-nav-link" href="invoice-list.html">List</a>
+                             </li>
+                             <li class="sub-nav-item">
+                                  <a class="sub-nav-link" href="invoice-details.html">Details</a>
+                             </li>                            
+                             <li class="sub-nav-item">
+                                  <a class="sub-nav-link" href="invoice-add.html">Create</a>
+                             </li>
+                        </ul>
+                   </div>
+              </li>
+
+              <li class="nav-item">
+                   <a class="nav-link" href="/admin/getWalletListingPage">
+                        <span class="nav-icon">
+                             <iconify-icon icon="solar:settings-bold-duotone"></iconify-icon>
+                        </span>
+                        <span class="nav-text">Wallet</span>
+                   </a>
+              </li>
+
+              <!-- <li class="menu-title mt-2">Users</li> -->
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/users">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:users-group-two-rounded-bold-duotone"></iconify-icon>
+                    </span>
+                    <span class="nav-text">Customers</span>
+                </a>
+            </li>
+            
+
+              <li class="nav-item">
+                   <a class="nav-link " href="/admin/getSaleReportPage" >
+                        <span class="nav-icon">
+                             <iconify-icon icon="solar:shop-bold-duotone"></iconify-icon>
+                        </span>
+                        <span class="nav-text"> Sale Report </span>
+                   </a>
+                   
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link text-danger" href="javascript:void(0);" onclick="handleLogout()">
+                    <span class="nav-icon">
+                        <iconify-icon icon="bx:bx-log-out" class="fs-18 align-middle"></iconify-icon>
+                    </span>
+                    <span class="nav-text align-middle">Logout</span>
+                </a>
+            </li> 
+         </ul>
+    </div>
+</div>
+<script>
+// Frontend logout function
+async function handleLogout() {
+    try {
+        const response = await fetch('/admin/logout', {
+            method: 'GET',
+            credentials: 'include' // Include cookies/session in the request
+        });
+
+        if (response.ok) {
+            console.log("Successfully logged out");
+            window.location.href = '/admin/login'; // Redirect after successful logout
+        } else {
+            const result = await response.json();
+            alert(result.message || 'Failed to logout. Please try again.');
+        }
+    } catch (error) {
+        alert('An unexpected error occurred.');
+        console.error('Error in handleLogout:', error);
+    }
+}
+
+</script>

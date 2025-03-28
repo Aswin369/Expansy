@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="/css/otpverification.css">
+</head>
+<body>
+    <div class="container">
+        <div class="otp-section">
+            <div class="logo">
+                <img src="/images/BrandName.png" alt="Expansy">
+            </div>
+            <h2 class="verify-otp">Verify Your OTP</h2>
+          
+            <input id="otp" type="text" placeholder="Enter your OTP" required>
+            <button id="btn" type="submit">Verify</button>
+            <a  id="resend-link" class="resend-otp" onclick="resendOTP()">
+                <p>Resend OTP</p>
+            </a>
+        
+            <div class="otp-timer">
+                <span id="timer">01:00</span>
+            </div>
+        </div>
+        <div class="image-section">
+            <img src="/images/enter-otp-concept-illustration_86047-735.jpg" alt="Perfume Bottle with Cherry Blossoms">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        let timerDisplay = document.getElementById("timer");
+        let resendLink = document.getElementById("resend-link");
+        let timeLeft = 60; // 1 minute
+
+        function updateTimer() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+
+            timerDisplay.textContent = `${minutes}:${seconds}`;
+
+            // Change color from green to red as time decreases
+            let percentage = (timeLeft / 60);
+            if (percentage < 0.3) {
+                timerDisplay.style.color = 'red';
+            } else {
+                timerDisplay.style.color = 'green';
+            }
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerDisplay.textContent = "Time's up!";
+                timerDisplay.style.color = 'red'; // Ensure color is red when time is up
+                resendLink.style.pointerEvents = "auto"; // Enable the resend link
+                resendLink.style.color = "#007bff"; // Change link color to indicate it's clickable
+            } else {
+                timeLeft--;
+            }
+        }
+
+        let timerInterval = setInterval(updateTimer, 1000);
+
+        // OTP Validation
+        document.getElementById("btn").addEventListener("click", async function(event){
+            event.preventDefault();
+            const otp = document.getElementById("otp").value;
+
+            const response = await fetch("/otpverification", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ otp })
+            });
+            const data = await response.json();
+            if (data.success) {
+                Swal.fire({
+                    title: "OTP Verified Successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    icon: "success"
+                }).then(() => {
+                    window.location.href = "/";
+                });
+            } else {
+                Swal.fire({
+                    title: data.message,
+                    showConfirmButton: false,
+                    timer: 1500,
+                    icon: "error"
+                });
+            }
+        });
+
+        // Resend OTP function
+        function resendOTP() {
+            // Simulate sending a request to resend the OTP (You would want to replace this with your server-side logic)
+            fetch("/resendOtp", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: "OTP Resent Successfully!",
+                        icon: "success",
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+
+                    // Reset timer after OTP is resent
+                    timeLeft = 60; // Reset time to 60 seconds
+                    clearInterval(timerInterval); // Clear the existing timer interval
+                    timerInterval = setInterval(updateTimer, 1000); // Start a new timer
+
+                    // Disable the resend link again after resending OTP
+                    resendLink.style.pointerEvents = "none"; // Disable the resend link
+                    resendLink.style.color = "#ccc"; // Change the link color to indicate it's disabled
+                } else {
+                    Swal.fire({
+                        title: "Error Resending OTP",
+                        icon: "error",
+                        text: data.message,
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: "Error",
+                    icon: "error",
+                    text: "An error occurred. Please try again later."
+                });
+            });
+        }
+
+        // Disable the resend OTP link initially
+        resendLink.style.pointerEvents = "none"; // Disable the resend link
+        resendLink.style.color = "#ccc"; // Change the link color to indicate it's disabled
+    </script>
+</body>
+</html>

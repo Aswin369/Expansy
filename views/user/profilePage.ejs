@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>About</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<body class="animsition">
+	
+	<!-- Header -->
+	
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Home</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/MagnificPopup/magnific-popup.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+<!--===============================================================================================-->
+<!-- Add these in your head -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+
+    .table-container {
+        max-height: 300px; /* Set a fixed height for scroll effect */
+        overflow-y: auto;  /* Enable vertical scrolling */
+    }
+
+    /* Hide scrollbar but allow scrolling */
+    .table-container::-webkit-scrollbar {
+        width: 0px;
+        display: none;
+    }
+</style>
+
+
+</head>
+<body class="animsition">
+	
+	<!-- Header -->
+	<header>
+		<!-- Header desktop -->
+		<div class="container-menu-desktop">
+			<!-- Topbar -->
+			<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop container">
+					
+					<!-- Logo desktop -->		
+					<a href="#" class="logo">
+						<img src="/images/BrandName.png" alt="IMG-LOGO">
+					</a>
+		
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li class="active-menu">
+								<a href="/">Home</a>
+								
+							</li>
+		
+							<li>
+								<a href="/shop">Shop</a>
+							</li>
+		
+							<li class="label1">
+								<a href="/">About Us</a>
+							</li>
+		
+							<li>
+								<a href="/">Contact</a>
+							</li>
+							<li>
+								<a href="/profile">Profile</a>
+							</li>
+							<li>
+								<% if (user) { %>
+									<a onclick="handleLogout()" href="/logout">Logout</a>
+								<% } else { %>
+									<a href="/login">Login</a>
+								<% } %>
+							</li> 
+						</ul>
+					</div>	
+		
+					<!-- Icon header -->
+					<div class="wrap-icon-header flex-w flex-r-m">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+							<i class="zmdi zmdi-search"></i>
+						</div>
+		
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+							<a href="/shoppingCart"><i class="zmdi zmdi-shopping-cart" style="color: black;"></i></a>
+						</div>
+						<a href="/getWhishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a>
+					</div>
+				</nav>
+			</div>
+		</div>
+		
+
+		<!-- Header Mobile -->
+		<div class="wrap-header-mobile">
+			<!-- Logo moblie -->		
+			<div class="logo-mobile">
+				<a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+			</div>
+
+			<!-- Icon header -->
+			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+					<i class="zmdi zmdi-search"></i>
+				</div>
+
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+					<i class="zmdi zmdi-shopping-cart"></i>
+				</div>
+
+				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+					<i class="zmdi zmdi-favorite-outline"></i>
+				</a>
+			</div>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+				<span class="hamburger-box">
+					<span class="hamburger-inner"></span>
+				</span>
+			</div>
+		</div>
+
+
+		<!-- Menu Mobile -->
+		<div class="menu-mobile">
+			<ul class="topbar-mobile">
+				<li>
+					<div class="left-top-bar">
+						Free shipping for standard order over $100
+					</div>
+				</li>
+
+				<li>
+					<div class="right-top-bar flex-w h-full">
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							Help & FAQs
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							My Account
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							EN
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							USD
+						</a>
+					</div>
+				</li>
+			</ul>
+
+			<ul class="main-menu-m">
+				<li>
+					<a href="index.html">Home</a>
+					<ul class="sub-menu-m">
+						<li><a href="index.html">Homepage 1</a></li>
+						<li><a href="home-02.html">Homepage 2</a></li>
+						<li><a href="home-03.html">Homepage 3</a></li>
+					</ul>
+					<span class="arrow-main-menu-m">
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</span>
+				</li>
+
+				<li>
+					<a href="product.html">Shop</a>
+				</li>
+
+				<li>
+					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+				</li>
+
+				<li>
+					<a href="blog.html">Blog</a>
+				</li>
+
+				<li>
+					<a href="about.html">About</a>
+				</li>
+
+				<li>
+					<a href="contact.html">Contact</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- Modal Search -->
+		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<div class="container-search-header">
+				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+					<img src="images/icons/icon-close2.png" alt="CLOSE">
+				</button>
+
+				<form class="wrap-search-header flex-w p-l-15">
+					<button class="flex-c-m trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+					<input class="plh3" type="text" name="search" placeholder="Search...">
+				</form>
+			</div>
+		</div>
+	</header>
+	<div style="margin-top: 8%;"></div>
+
+	<!-- Content page -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-md-3 mb-4">
+                <div class="list-group">
+                    <a href="#dashboard" class="list-group-item list-group-item-action active" data-bs-toggle="list">
+                         Dashboard
+                    </a>
+					
+                    <a href="#orders" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                         Orders
+                    </a>
+                    <a href="#update-profile" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                         Update Profile
+                    </a>
+                    <a href="#addresses" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                         Addresses
+                    </a>
+                    <a href="#wallet" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                         Wallet
+                    </a>
+                    <a href="#forgot-password" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                         Change Password
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action text-danger">
+                         Logout
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <!-- Dashboard -->
+                    <div class="tab-pane fade show active" id="dashboard">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Dashboard</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Full Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <%= data.name%>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Email</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <%= data.email%>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Phone</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <%= data.phone%>
+                                    </div>
+                                </div>
+								<div class="row mb-3">
+									<div class="col-sm-12">
+										<button id="showReferralBtn" class="btn btn-primary">Show My Referral Code</button>
+									</div>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+					<!-- Modal/Popup for Referral Code -->
+					<div class="modal fade" id="referralModal" tabindex="-1" aria-labelledby="referralModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header bg-primary text-white">
+									<h5 class="modal-title" id="referralModalLabel">Your Referral Code</h5>
+									<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body text-center py-4">
+									<div class="referral-container p-3 mb-3 border rounded bg-light">
+										<h2 class="referral-code mb-0" id="referralCode"><%= data.referralCode%></h2>
+									</div>
+									<p class="mb-3">Share this code with friends and earn rewards!</p>
+									<button id="copyBtn" class="btn btn-outline-primary">
+										<i class="bi bi-clipboard me-2"></i>Copy Code
+									</button>
+									<div class="copy-success-message mt-2 text-success d-none" id="copySuccess">
+										<i class="bi bi-check-circle me-1"></i>Copied to clipboard!
+									</div>
+								</div>
+								<div class="modal-footer bg-light">
+									<p class="small text-muted mb-0">Each friend who uses your code gets a 10% discount on their first purchase</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+                    <!-- Orders -->
+					<div class="tab-pane fade" id="orders">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">My Orders</h5>
+							</div>
+							<div class="card-body">
+								<% if (oderData && oderData.length > 0) { %>
+									<div class="table-responsive"> 
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>Order ID</th>
+													<th>Product</th>
+													<th>Date</th>
+													<th>Status</th>
+													<th>Total</th>
+													<th>Actions</th>
+												</tr>
+											</thead>
+											<tbody>
+												<% oderData.forEach((item) => { %>
+												<tr>
+													<td><%= item.orderId %></td>
+													<td>
+														<% if (item.products && item.products.length > 0) { %>
+															<div class="product-images">
+																<!-- Main product image -->
+																<div class="main-product">
+																	<img src="<%= item.products[0].productId?.productImage?.[0] || '/images/product-placeholder.jpg' %>" 
+																		alt="Product" 
+																		class="img-thumbnail" 
+																		style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;">
+																	<span class="product-name text-truncate d-block" style="max-width: 120px;">
+																		<%= item.products[0].productId?.productName || 'Product' %>
+																	</span>
+																</div>
+																
+																<!-- Additional product indicators if there are more products -->
+																<% if (item.products.length > 1) { %>
+																	<div class="additional-products mt-1">
+																		<div class="d-flex align-items-center">
+																			<% if (item.products.length > 1 && item.products.length <= 3) { %>
+																				<% for(let i = 1; i < item.products.length; i++) { %>
+																					<div class="additional-img-container me-1">
+																						<img src="<%= item.products[i].productId?.productImage?.[0] || '/images/product-placeholder.jpg' %>" 
+																							alt="Additional product" 
+																							class="img-thumbnail" 
+																							style="width: 30px; height: 30px; object-fit: cover; border-radius: 4px;">
+																					</div>
+																				<% } %>
+																			<% } else if (item.products.length > 3) { %>
+																				<div class="additional-img-container me-1">
+																					<img src="<%= item.products[1].productId?.productImage?.[0] || '/images/product-placeholder.jpg' %>" 
+																						alt="Additional product" 
+																						class="img-thumbnail" 
+																						style="width: 30px; height: 30px; object-fit: cover; border-radius: 4px;">
+																				</div>
+																				<div class="more-indicator ms-1">
+																					<span class="badge bg-secondary">+<%= item.products.length - 2 %> more</span>
+																				</div>
+																			<% } %>
+																		</div>
+																	</div>
+																<% } %>
+															</div>
+														<% } else { %>
+															<span class="text-muted">No products</span>
+														<% } %>
+													</td>
+													<td><%= new Date(item.createdAt).toLocaleDateString() %></td>
+													<td>
+														<% if (item.status === 'Delivered') { %>
+															<span class="badge bg-success">Delivered</span>
+														<% } else if (item.status === 'Pending') { %>
+															<span class="badge bg-warning text-dark">Pending</span>
+														<% } else if (item.status === 'Ordered') { %>
+															<span class="badge bg-info">Ordered</span>
+														<% } else if (item.status === 'Cancelled') { %>
+															<span class="badge bg-danger">Cancelled</span>
+														<% } else if (item.status.includes('Return')) { %>
+															<span class="badge bg-primary"><%= item.status %></span>
+														<% } else { %>
+															<span class="badge bg-secondary"><%= item.status %></span>
+														<% } %>
+													</td>
+													<td>₹<%= item.payableAmount.toFixed(2) %></td>
+													<td>
+														<a href="/ordersview/<%= item._id %>" class="btn btn-primary btn-sm">View</a>
+													</td>
+												</tr>
+												<% }) %>
+											</tbody>
+										</table>
+									</div>
+									
+									<!-- Pagination -->
+									<% if (pagination && pagination.totalPages > 1) { %>
+										<nav aria-label="Order pagination">
+											<ul class="pagination justify-content-center mt-4">
+												<li class="page-item <%= pagination.currentPage === 1 ? 'disabled' : '' %>">
+													<a class="page-link" href="?page=<%= pagination.currentPage - 1 %>" aria-label="Previous">
+														<span aria-hidden="true">&laquo;</span>
+													</a>
+												</li>
+												
+												<% for(let i = 1; i <= pagination.totalPages; i++) { %>
+													<li class="page-item <%= pagination.currentPage === i ? 'active' : '' %>">
+														<a class="page-link" href="?page=<%= i %>"><%= i %></a>
+													</li>
+												<% } %>
+												
+												<li class="page-item <%= pagination.currentPage === pagination.totalPages ? 'disabled' : '' %>">
+													<a class="page-link" href="?page=<%= pagination.currentPage + 1 %>" aria-label="Next">
+														<span aria-hidden="true">&raquo;</span>
+													</a>
+												</li>
+											</ul>
+										</nav>
+									<% } %>
+								<% } else { %>
+									<div class="text-center py-4">
+										<p class="text-muted">You haven't placed any orders yet.</p>
+										<a href="/shop" class="btn btn-primary">Start Shopping</a>
+									</div>
+								<% } %>
+							</div>
+						</div>
+					</div>
+
+                    <!-- Update Profile -->
+                    <div class="tab-pane fade" id="update-profile">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Update Profile</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="formSubmit">
+                                    <div class="mb-3">
+                                        <label class="form-label">Full Name</label>
+                                        <input type="text" name="name" id="name" class="form-control" value="<%= data.name%>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" value="<%= data.email%>" disabled>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Phone</label>
+                                        <input type="tel" name="phone" id="phone" class="form-control" value="<%= data.phone%>">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Addresses -->
+                    <div class="tab-pane fade" id="addresses">
+						<div class="card">
+							<!-- Main addresses list view -->
+							<div id="addressesList">
+								<div class="card-header d-flex justify-content-between align-items-center">
+									<h5 class="card-title mb-0">My Addresses</h5>
+									<button class="btn btn-primary btn-sm" onclick="showAddressForm()">
+										<i class="fas fa-plus me-1"></i> Add New Address
+									</button>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<% if (address.length > 0) { %>
+											<% address.forEach(addr => { %>
+												<div class="col-md-6 mb-3">
+													<div class="card">
+														<div class="card-body">
+															<p class="card-text">
+																<strong>Address:</strong> <%= addr.addressType %> <br>
+																<strong>City:</strong> <%= addr.city %> <br>
+																<strong>Landmark:</strong> <%= addr.landMark %> <br>
+																<strong>State:</strong> <%= addr.state %> <br>
+																<strong>Pincode:</strong> <%= addr.pincode %> <br>
+																<strong>Phone:</strong> <%= addr.phone %> <br>
+																<strong>Alternate Phone:</strong> <%= addr.altPhone %>
+															</p>
+															<div class="btn-group">
+																<button type="button" class="btn btn-primary" onclick="loadEditForm('<%= addr._id %>')">
+																	Edit
+																</button>
+																<button type="button" class="btn btn-danger" onclick="confirmDelete('<%= addr._id %>')">
+																	Delete
+																</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											<% }) %>
+										<% } else { %>
+											<p>No addresses found.</p>
+										<% } %>
+									</div>
+							
+									<!-- Address Pagination -->
+									<nav aria-label="Address Pagination">
+										<ul class="pagination justify-content-center">
+											<% if (addressPagination.hasPrevAddressPage) { %>
+												<li class="page-item">
+													<a class="page-link" href="?addressPage=<%= addressPagination.currentAddressPage - 1 %>">Previous</a>
+												</li>
+											<% } %>
+							
+											<% for (let i = 1; i <= addressPagination.totalAddressPages; i++) { %>
+												<li class="page-item <%= i === addressPagination.currentAddressPage ? 'active' : '' %>">
+													<a class="page-link" href="?addressPage=<%= i %>"><%= i %></a>
+												</li>
+											<% } %>
+							
+											<% if (addressPagination.hasNextAddressPage) { %>
+												<li class="page-item">
+													<a class="page-link" href="?addressPage=<%= addressPagination.currentAddressPage + 1 %>">Next</a>
+												</li>
+											<% } %>
+										</ul>
+									</nav>
+								</div>
+							</div>
+							
+							
+					
+							<!-- Add address form view -->
+							<div id="addressForm" style="display: none;">
+								<div class="card-header d-flex justify-content-between align-items-center">
+									<h5 class="card-title mb-0">Add New Address</h5>
+									<button class="btn btn-secondary btn-sm" onclick="showAddressesList()">
+										<i class="fas fa-arrow-left me-1"></i> Back to Addresses
+									</button>
+								</div>
+								<div class="card-body">
+									<form id="newAddressForm" novalidate>
+										<div class="mb-3">
+											<label for="address" class="form-label">Address</label>
+											<textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+										</div>
+										<div class="mb-3">
+											<label for="city" class="form-label">City</label>
+											<input type="text" class="form-control" id="city" name="city" required>
+										</div>
+										<div class="mb-3">
+											<label for="landmark" class="form-label">Landmark</label>
+											<input type="text" class="form-control" id="landmark" name="landmark">
+										</div>
+										<div class="mb-3">
+											<label for="state" class="form-label">State</label>
+											<input type="text" class="form-control" id="state" name="state" required>
+										</div>
+										<div class="mb-3">
+											<label for="pincode" class="form-label">Pincode</label>
+											<input type="text" class="form-control" id="pincode" name="pincode" required>
+										</div>
+										<div class="mb-3">
+											<label for="phone" class="form-label">Phone Number</label>
+											<input type="tel" class="form-control" id="phone" name="phone" required>
+										</div>
+										<div class="mb-3">
+											<label for="altPhone" class="form-label">Alternative Phone Number</label>
+											<input type="tel" class="form-control" id="altPhone" name="altPhone">
+										</div>
+										<div class="d-flex justify-content-end gap-2">
+											<button type="button" class="btn btn-secondary" onclick="showAddressesList()">Cancel</button>
+											<button type="submit" class="btn btn-primary">Save Address</button>
+										</div>
+									</form>
+								</div>
+							</div>
+
+
+							<div id="editAddressForm" style="display: none;">
+								<div class="card-header d-flex justify-content-between align-items-center">
+									<h5 class="card-title mb-0">Edit Address</h5>
+									<button class="btn btn-secondary btn-sm" onclick="hideEditAddressForm()">
+										<i class="fas fa-arrow-left me-1"></i> Back to Addresses
+									</button>
+								</div>
+								<div class="card-body">
+									<form id="editAddressFormElement" action="/updateAddress" method="POST" novalidate>
+										<input type="hidden" id="edit_addressId" name="addressId">
+										<div class="mb-3">
+											<label for="edit_address" class="form-label">Address</label>
+											<textarea class="form-control" id="edit_address" name="address" rows="3" required></textarea>
+										</div>
+										<div class="mb-3">
+											<label for="edit_city" class="form-label">City</label>
+											<input type="text" class="form-control" id="edit_city"  name="city" required>
+											
+										</div>
+										<div class="mb-3">
+											<label for="edit_landmark" class="form-label">Landmark</label>
+											<input type="text" class="form-control" id="edit_landmark" name="landmark">
+										</div>
+										<div class="mb-3">
+											<label for="edit_state" class="form-label">State</label>
+											<input type="text" class="form-control" id="edit_state" name="state" required>
+										</div>
+										<div class="mb-3">
+											<label for="edit_pincode" class="form-label">Pincode</label>
+											<input type="text" class="form-control" id="edit_pincode" name="pincode" required>
+										</div>
+										<div class="mb-3">
+											<label for="edit_phone" class="form-label">Phone Number</label>
+											<input type="tel" class="form-control" id="edit_phone" name="phone" required>
+										</div>
+										<div class="mb-3">
+											<label for="edit_altPhone" class="form-label">Alternative Phone Number</label>
+											<input type="tel" class="form-control" id="edit_altPhone" name="altPhone">
+										</div>
+										<div class="d-flex justify-content-end gap-2">
+											<button type="button" class="btn btn-secondary" onclick="hideEditAddressForm()">Cancel</button>
+											<button type="submit" class="btn btn-primary">Update Address</button>
+										</div>
+									</form>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				
+
+
+                    <!-- Wallet -->
+                    <div class="tab-pane fade" id="wallet">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">My Wallet</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="bg-light p-3 rounded mb-4">
+                                    <h6 class="text-muted">Total Balance</h6>
+                                    <h2 class="mb-0">₹<%= walletData?.[0]?.balance %></h2>
+
+                                </div>
+                                <h6 class="mb-3">Transaction History</h6>
+								<div class="list-group" style="max-height: 400px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+									<% findTranscationHistory.forEach(transaction => { %>
+										<div class="list-group-item" style="padding: 15px 20px; border-bottom: 1px solid #f0f0f0;">
+											<div class="d-flex justify-content-between align-items-center">
+												<div>
+													<% if (transaction.type === 'credit') { %>
+														<h6 class="mb-0 text-success">Wallet Recharge</h6>
+													<% } else if (transaction.type === 'debit') { %>
+														<h6 class="mb-0 text-danger">Order Payment</h6>
+													<% } %>
+													<small class="text-muted">
+														<%= new Date(transaction.date).toLocaleDateString('en-GB', {
+															day: '2-digit',
+															month: 'short',
+															year: 'numeric'
+														}) %>
+													</small>
+												</div>
+								
+												<% if (transaction.type === 'credit') { %>
+													<span class="text-success fw-bold">+₹<%= transaction.amount.toLocaleString() %></span>
+												<% } else if (transaction.type === 'debit') { %>
+													<span class="text-danger fw-bold">-₹<%= transaction.amount.toLocaleString() %></span>
+												<% } %>
+											</div>
+										</div>
+									<% }) %>
+								</div>
+								
+								
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Forgot Password -->
+                    <div class="tab-pane fade" id="forgot-password">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">Change Password</h5>
+							</div>
+							<div class="card-body">
+								<div class="mb-3">
+									<label class="form-label">Old Password</label>
+									<input type="password" class="form-control" placeholder="Enter your old password">
+								</div>
+								<div class="mb-3">
+									<label class="form-label">New Password</label>
+									<input type="password" class="form-control" placeholder="Enter your new password">
+								</div>
+								<div class="mb-3">
+									<label class="form-label">Confirm Password</label>
+									<input type="password" class="form-control" placeholder="Confirm your new password">
+								</div>
+								<button class="btn btn-primary">Change Password</button>
+							</div>
+						</div>
+					</div>
+					
+                </div>
+            </div>
+        </div>
+    </div>
+	
+		
+
+	<!-- Footer -->
+	<footer class="bg3 p-t-75 p-b-32">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Categories
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Women
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Men
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shoes
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Watches
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Help
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Track Order
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Returns 
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shipping
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								FAQs
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						GET IN TOUCH
+					</h4>
+
+					<p class="stext-107 cl7 size-201">
+						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+					</p>
+
+					<div class="p-t-27">
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-instagram"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-pinterest-p"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Newsletter
+					</h4>
+
+					<form>
+						<div class="wrap-input1 w-full p-b-4">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+							<div class="focus-input1 trans-04"></div>
+						</div>
+
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+								Subscribe
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="p-t-40">
+				<div class="flex-c-m flex-w p-b-18">
+					<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
+					</a>
+				</div>
+
+				<p class="stext-107 cl6 txt-center">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+				</p>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+	const validators = {
+    address: (value) => {
+        if (!value.trim()) return "Address is required";
+        if (value.trim().length < 10) return "Address must be at least 10 characters long";
+        return "";
+    },
+    city: (value) => {
+        if (!value.trim()) return "City is required";
+        if (!/^[a-zA-Z\s\-'.]{2,}$/.test(value.trim())) {
+            return "City name can only contain letters, spaces, hyphens, and apostrophes";
+        }
+        return "";
+    },
+    landmark: (value) => {
+        // Landmark is optional, but if provided, must be at least 3 characters
+        if (!value.trim()) return "";
+        if (value.trim().length < 3) return "Landmark must be at least 3 characters long";
+        return "";
+    },
+    state: (value) => {
+        if (!value.trim()) return "State is required";
+        if (!/^[a-zA-Z\s]{2,}$/.test(value.trim())) {
+            return "State name can only contain letters and spaces";
+        }
+        return "";
+    },
+    pincode: (value) => {
+        if (!value.trim()) return "Pincode is required";
+        if (!/^\d{6}$/.test(value.trim())) {
+            return "Pincode must be exactly 6 digits";
+        }
+        return "";
+    },
+    phone: (value) => {
+        if (!value.trim()) return "Phone number is required";
+        if (!/^\d{10}$/.test(value.trim())) {
+            return "Phone number must be exactly 10 digits";
+        }
+        return "";
+    },
+    altPhone: (value) => {
+        // Alt phone is optional, but if provided, must be exactly 10 digits
+        if (!value.trim()) return "";
+        if (!/^\d{10}$/.test(value.trim())) {
+            return "Alternative phone number must be exactly 10 digits";
+        }
+        return "";
+    }
+};
+
+function showError(inputId, message) {
+    const input = document.getElementById(inputId);
+    if (!input) return; // Guard against null input
+    
+    const errorDiv = input.nextElementSibling;
+    
+    if (!errorDiv || !errorDiv.classList.contains('invalid-feedback')) {
+        const div = document.createElement('div');
+        div.className = 'invalid-feedback';
+        div.textContent = message;
+        div.style.color = 'red'; // Make sure error messages are red
+        div.style.display = 'block'; // Ensure the error is visible
+        input.parentNode.appendChild(div);
+    } else {
+        errorDiv.textContent = message;
+        errorDiv.style.color = 'red'; // Make sure error messages are red
+        errorDiv.style.display = 'block'; // Ensure the error is visible
+    }
+    
+    input.classList.add('is-invalid');
+}
+
+function clearError(inputId) {
+    const input = document.getElementById(inputId);
+    if (!input) return; // Guard against null input
+    
+    input.classList.remove('is-invalid');
+    const errorDiv = input.nextElementSibling;
+    if (errorDiv && errorDiv.classList.contains('invalid-feedback')) {
+        errorDiv.textContent = '';
+        errorDiv.style.display = 'none';
+    }
+}
+
+function validateForm(formData) {
+    let isValid = true;
+    const errors = {};
+
+    // Clear all previous errors first
+    Object.keys(validators).forEach(field => {
+        clearError(field);
+    });
+
+    for (const [field, value] of formData.entries()) {
+        if (validators[field]) {
+            const error = validators[field](value);
+            if (error) {
+                errors[field] = error;
+                isValid = false;
+                showError(field, error);
+            }
+        }
+    }
+
+    return { isValid, errors };
+}
+
+function showAddressForm() {
+    document.getElementById('addressesList').style.display = 'none';
+    document.getElementById('addressForm').style.display = 'block';
+}
+
+function showAddressesList() {
+    const form = document.getElementById('newAddressForm');
+    if (form.querySelector('.is-invalid') || new FormData(form).get('address')) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You will lose any unsaved changes!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, go back!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('addressForm').style.display = 'none';
+                document.getElementById('addressesList').style.display = 'block';
+                form.reset();
+            }
+        });
+    } else {
+        document.getElementById('addressForm').style.display = 'none';
+        document.getElementById('addressesList').style.display = 'block';
+    }
+}
+
+async function handleAddressSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    const { isValid, errors } = validateForm(formData);
+    
+    if (!isValid) {
+        // No SweetAlert for validation errors - just display the field-level errors
+        return;
+    }
+
+    try {
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...';
+
+        const addressData = Object.fromEntries(formData.entries());
+        
+        const response = await fetch('/addaddress', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(addressData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+            // Show SweetAlert only for successful updates
+            await Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Address saved successfully!',
+                showConfirmButton: true
+            });
+            window.location.reload();
+            form.reset();
+            showAddressesList();
+        } else {
+            throw new Error(result.message || 'Failed to save address');
+        }
+
+    } catch (error) {
+        console.error('Error saving address:', error);
+        await Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: `Error saving address: ${error.message}`,
+            showConfirmButton: true
+        });
+    } finally {
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Save Address';
+    }
+}
+
+// Function to validate edit form specifically
+function validateEditForm(form) {
+    // Clear all previous errors
+    Array.from(form.elements).forEach(element => {
+        if (element.id) {
+            clearError(element.id);
+        }
+    });
+    
+    let isValid = true;
+    const formData = new FormData(form);
+    
+    // Map of edit form field names to validator field names
+    const fieldMap = {
+        'address': 'address',
+        'city': 'city',
+        'landmark': 'landmark',
+        'state': 'state',
+        'pincode': 'pincode',
+        'phone': 'phone',
+        'altPhone': 'altPhone'
+    };
+    
+    // Validate each field
+    for (const [field, value] of formData.entries()) {
+        // Skip the addressId field
+        if (field === 'addressId') continue;
+        
+        const validatorField = fieldMap[field];
+        const inputId = `edit_${field}`;
+        
+        if (validators[validatorField]) {
+            const error = validators[validatorField](value);
+            if (error) {
+                isValid = false;
+                showError(inputId, error);
+            }
+        }
+    }
+    
+    return isValid;
+}
+
+function handleEditFormSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const isValid = validateEditForm(form);
+    
+    if (!isValid) {
+        // Don't proceed if validation fails
+        return;
+    }
+    
+    // If validation passes, show loading state on button
+    const submitButton = form.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating...';
+    
+    // Submit the form
+    form.submit();
+}
+
+// Function to hide the edit address form
+function hideEditAddressForm() {
+    // Implement based on your app's structure
+    const editAddressForm = document.getElementById('editAddressForm');
+    if (editAddressForm) {
+        editAddressForm.style.display = 'none';
+    }
+    
+    // Clear all error messages
+    const form = document.getElementById('editAddressFormElement');
+    if (form) {
+        Array.from(form.elements).forEach(element => {
+            if (element.id) {
+                clearError(element.id);
+            }
+        });
+        form.reset();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Add Address Form handling
+    const form = document.getElementById('newAddressForm');
+    if (form) {
+        form.addEventListener('submit', handleAddressSubmit);
+    }
+    
+    // Edit Address Form handling
+    const editForm = document.getElementById('editAddressFormElement');
+    if (editForm) {
+        editForm.addEventListener('submit', handleEditFormSubmit);
+    }
+});
+		</script>
+
+
+<!-- profile update -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		document.getElementById("formSubmit").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+
+    if (name.trim() === "") {
+        Swal.fire({
+            title: "Validation error",
+            text: "Name cannot be empty",
+            icon: "error"
+        });
+        return;
+    }
+
+    if (phone.trim() === "") {
+        Swal.fire({
+            title: "Validation error",
+            text: "Phone cannot be empty",
+            icon: "error"
+        });
+        return;
+    }
+
+    if (!/^\d{10}$/.test(phone)) {
+        Swal.fire({
+            title: "Validation error",
+            text: "Enter a valid phone number",
+            icon: "error"
+        });
+        return;
+    }
+
+    fetch("/editProfile", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, phone })
+    })
+    .then(response => response.json())
+    .then(data => {
+        Swal.fire({
+            title: "Update successfully",
+            text: data.message,
+            icon: "success"
+        });
+		window.location.reload()
+    })
+    .catch(error => {
+        Swal.fire({
+            title: "Something went wrong",
+            text: "Failed to update profile",
+            icon: "error"
+        });
+    });
+});
+
+	</script>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM fully loaded");
+
+    // Get the saved tab ID from localStorage
+    const savedTabId = localStorage.getItem("activeTabId");
+    console.log("Saved tab ID from localStorage:", savedTabId);
+
+    if (savedTabId) {
+        const activeTab = document.querySelector(`a[href="#${savedTabId}"]`);
+        if (activeTab) {
+            console.log("Activating saved tab:", savedTabId);
+            const tab = new bootstrap.Tab(activeTab);
+            tab.show();
+        }
+    }
+
+    // Listen for tab changes and save the active tab ID
+    document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tabEl => {
+        tabEl.addEventListener('shown.bs.tab', function (event) {
+            const tabId = event.target.getAttribute('href').substring(1); // Extract ID from href
+            console.log("Saving active tab ID:", tabId);
+            localStorage.setItem("activeTabId", tabId);
+        });
+    });
+});
+
+</script>
+
+	<!-- This is for delete address -->
+
+	<script>
+		function confirmDelete(addressId){
+			Swal.fire({
+				title: 'Are you sure?',
+        		text: "You won't be able to revert this!",
+        		icon: 'warning',
+        		showCancelButton: true,
+        		confirmButtonText: 'Yes, delete it!',
+        		cancelButtonText: 'Cancel',
+			}).then((result)=>{
+				if(result.isConfirmed){
+					deleteAddress(addressId)
+				}
+			})
+		}
+
+		function deleteAddress(addressId){
+			fetch(`/deleteAddress/${addressId}`,{
+				method: "DELETE",
+				headers:{
+					"Content-Type": "application/json",
+				},
+
+			}).then(response => response.json())
+			.then(data=>{
+				if(data.success){
+					Swal.fire(
+						'Deleted!',
+						'Your address has been deleted.',
+						'success'
+					);
+					window.location.reload()
+
+				}else{
+					Swal.fire(
+						"Error!",
+						'There was an issue deleting the address.',
+						'error'
+					)
+				}
+			})
+			.catch(error=>{
+				Swal.fire(
+					"Error!",
+					"Something went wrong",
+					"error"
+				)
+				console.error("Error",error)
+			})
+		}
+	</script>
+
+
+<!-- This script for edit address	 -->
+<script>
+	// Function to load the edit form
+	async function loadEditForm(addressId) {
+		try {
+
+			console.log("this is address  id ",addressId)
+			// Hide the addresses list
+			document.getElementById('addressesList').style.display = 'none';
+			
+			// Show the edit form
+			document.getElementById('editAddressForm').style.display = 'block';
+			
+			// Fetch address data
+			const response = await fetch(`/getAddress/${addressId}`);
+			const addressData = await response.json();
+
+			console.log("addrsess data", addressData)
+			// Set the address ID in hidden field
+			document.getElementById('edit_addressId').value = addressId;
+			console.log("this is address id ", addressId)
+			// Fill the form with existing data
+			document.getElementById('edit_address').value = addressData.addressType;
+			document.getElementById('edit_city').value = addressData.city;
+			document.getElementById('edit_landmark').value = addressData.landMark;
+			document.getElementById('edit_state').value = addressData.state;
+			document.getElementById('edit_pincode').value = addressData.pincode;
+			document.getElementById('edit_phone').value = addressData.phone;
+			document.getElementById('edit_altPhone').value = addressData.altPhone || '';
+			
+			console.log("addressData.state", addressData.state)
+
+		} catch (error) {
+			console.error('Error loading address data:', error);
+			alert('Error loading address data. Please try again.');
+		}
+	}
+	
+	// Function to hide the edit form and show the addresses list
+	function hideEditAddressForm() {
+		document.getElementById('editAddressForm').style.display = 'none';
+		document.getElementById('addressesList').style.display = 'block';
+	}
+	
+	// Function to handle edit form submission
+	document.getElementById('editAddressFormElement').addEventListener('submit', async function(e) {
+
+		const formData = {
+    addressType: document.getElementById('edit_address').value,
+    city: document.getElementById('edit_city').value,
+    landMark: document.getElementById('edit_landmark').value,
+    state: document.getElementById('edit_state').value,
+    pincode: document.getElementById('edit_pincode').value,
+    phone: document.getElementById('edit_phone').value,
+    altPhone: document.getElementById('edit_altPhone').value
+};
+		const addressId = document.getElementById('edit_addressId').value;
+		console.log("thidif sfretund dsfjakslsdkjflasjdfhildfhiu",addressId)
+		e.preventDefault();
+		try {
+			const response = await fetch(`/updateAddress/${addressId}`, {
+				method: 'POST',
+    				headers: {
+        			'Content-Type': 'application/json'
+    			},
+    				body: JSON.stringify(formData)
+			});
+			const result = await response.json()
+			if (result.success) {
+				Swal.fire({
+            		title: "Update successfully",
+            		text: result.message,
+            		icon: "success"
+        		});
+				window.location.reload();
+			} else {
+				throw new Error('Failed to update address');
+			}
+		} catch (error) {
+			console.error('Error updating address:', error);
+			Swal.fire({
+            title: "Error updating address",
+            text: result.message,
+            icon: "error"
+        });
+		}
+	});
+	</script>
+
+
+<!-- Change password script -->
+
+<script>
+	// Get the form element
+// const form = document.getElementById('emailForm');
+
+// // Add submit event listener
+// form.addEventListener('submit', async (e) => {
+//     e.preventDefault();
+
+//     // Get the email value
+//     const email = document.getElementById('email').value;
+
+//     try {
+//         // Show loading state
+//         Swal.fire({
+//             title: 'Processing...',
+//             allowOutsideClick: false,
+//             didOpen: () => {
+//                 Swal.showLoading();
+//             }
+//         });
+
+//         // Send POST request to backend
+//         const response = await fetch('/forgot-email-valid', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({ email: email })
+//         });
+
+//         // Check if the response is JSON
+//         const contentType = response.headers.get('content-type');
+//         if (contentType && contentType.includes('application/json')) {
+//             const data = await response.json();
+            
+//             if (!data.success) {
+//                 // Show error message from backend
+//                 Swal.fire({
+//                     icon: 'error',
+//                     title: 'Error',
+//                     text: data.message || 'Something went wrong. Please try again.',
+//                 });
+//                 return;
+//             }
+//         } else {
+//             // If it's not JSON, it's likely a page render response
+//             // Handle the redirect manually
+//             window.location.href = response.url || '/forgot-email-valid';
+//             return;
+//         }
+
+//     } catch (error) {
+//         console.error('Error:', error);
+//         // Show error message
+//         Swal.fire({
+//             icon: 'error',
+//             title: 'Error',
+//             text: 'Something went wrong. Please try again.',
+//         });
+//     }
+// });
+</script>
+
+
+<!-- order show scritp -->
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<!--===============================================================================================-->	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+
+
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script>
+		async function handleLogout() {
+			try {
+				const response = await fetch("/logout",{
+					method: "GET",
+					credentials: "include"
+				})
+				if(response.ok){
+					console.log("Successfully logged out")
+					window.location.href = "/login"
+				}else{
+					const result = await response.json()
+					alert(result.message || "Failed to logout. Please try again")
+				}
+			} catch (error) {
+				alert("An unexpected error occurred")
+				console.log("Error in handleLogout",error)
+			}
+		}
+	</script>
+	
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+  // Get form elements
+  const oldPasswordInput = document.querySelector('#forgot-password input[placeholder="Enter your old password"]');
+  const newPasswordInput = document.querySelector('#forgot-password input[placeholder="Enter your new password"]');
+  const confirmPasswordInput = document.querySelector('#forgot-password input[placeholder="Confirm your new password"]');
+  const submitButton = document.querySelector('#forgot-password .btn-primary');
+
+  if (!oldPasswordInput || !newPasswordInput || !confirmPasswordInput || !submitButton) {
+    console.error('One or more form elements not found');
+    return;
+  }
+
+  submitButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Get input values
+    const oldPassword = oldPasswordInput.value.trim();
+    const newPassword = newPasswordInput.value.trim();
+    const confirmPassword = confirmPasswordInput.value.trim();
+    
+	console.log("oldPassword",oldPassword)
+	console.log("newPassword",newPassword)
+	console.log("confirmPassword",confirmPassword)
+    // Clear previous error messages
+    document.querySelectorAll('.error-message').forEach(el => el.remove());
+    
+    // Reset input styles
+    [oldPasswordInput, newPasswordInput, confirmPasswordInput].forEach(input => {
+      input.classList.remove('is-invalid');
+    });
+    
+    let isValid = true;
+    
+    // Validate old password - must not be empty
+    if (!oldPassword) {
+      displayError(oldPasswordInput, 'Old password is required');
+      isValid = false;
+    }
+    
+    // Validate new password
+    if (newPassword.length < 8) {
+      displayError(newPasswordInput, 'Password must be at least 8 characters long');
+      isValid = false;
+    }
+    if (!/[A-Z]/.test(newPassword)) {
+      displayError(newPasswordInput, 'Password must contain at least one capital letter');
+      isValid = false;
+    }
+    if (!/[0-9]/.test(newPassword)) {
+      displayError(newPasswordInput, 'Password must contain at least one number');
+      isValid = false;
+    }
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(newPassword)) {
+      displayError(newPasswordInput, 'Password must contain at least one special character');
+      isValid = false;
+    }
+    
+    // Confirm passwords match
+	console.log("newPassword",newPassword)
+	console.log("confirmPassword",confirmPassword)
+    if (newPassword !== confirmPassword) {
+      displayError(confirmPasswordInput, 'Passwords do not match');
+      isValid = false;
+    }
+    
+    if (isValid) {
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+      
+      fetch('/profile-page-change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ oldPassword, newPassword })
+      })
+      .then(response => response.json())
+      .then(data => {
+        Swal.fire({
+          title: data.success ? 'Success!' : 'Error',
+          text: data.message || 'Failed to change password. Please try again.',
+          icon: data.success ? 'success' : 'error',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          if (data.success) {
+            oldPasswordInput.value = '';
+            newPasswordInput.value = '';
+            confirmPasswordInput.value = '';
+          }
+        });
+      })
+      .catch(error => {
+        Swal.fire({
+          title: 'Error',
+          text: 'Network or server error: ' + error.message,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      })
+      .finally(() => {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Change Password';
+      });
+    }
+  });
+
+  function displayError(inputElement, message) {
+    inputElement.classList.add('is-invalid');
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'invalid-feedback error-message';
+    errorDiv.textContent = message;
+    inputElement.parentNode.appendChild(errorDiv);
+  }
+});
+
+</script>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show modal when button is clicked
+        document.getElementById('showReferralBtn').addEventListener('click', function() {
+            var referralModal = new bootstrap.Modal(document.getElementById('referralModal'));
+            referralModal.show();
+        });
+
+        // Copy referral code to clipboard
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            var referralCode = document.getElementById('referralCode').textContent;
+            navigator.clipboard.writeText(referralCode).then(function() {
+                // Show success message
+                document.getElementById('copySuccess').classList.remove('d-none');
+                
+                // Hide success message after 2 seconds
+                setTimeout(function() {
+                    document.getElementById('copySuccess').classList.add('d-none');
+                }, 2000);
+            });
+        });
+    });
+</script>
+
+<!-- Add these styles to your CSS file or in a style tag in the head -->
+<style>
+    .referral-container {
+        border: 2px dashed #dee2e6 !important;
+        background-color: #f8f9fa !important;
+        transition: all 0.3s ease;
+    }
+    
+    .referral-container:hover {
+        background-color: #e9ecef !important;
+    }
+    
+    .referral-code {
+        font-family: monospace;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #0d6efd;
+    }
+    
+    #copyBtn {
+        transition: all 0.2s ease;
+    }
+    
+    #copyBtn:hover {
+        background-color: #0d6efd;
+        color: white;
+    }
+    
+    .copy-success-message {
+        animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
+
+</body>
+</html>
