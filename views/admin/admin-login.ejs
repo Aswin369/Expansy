@@ -59,11 +59,12 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
-   document.querySelector("form").addEventListener("submit", async function (event) {
+  document.querySelector("form").addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const name = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+
     if (!name || !password) {
         Swal.fire({
             icon: "error",
@@ -82,15 +83,13 @@
             body: JSON.stringify({ name, password }),
         });
 
-        
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("text/html")) {
-
-            document.documentElement.innerHTML = await response.text();
-            return;
-        }
         const result = await response.json();
-        throw new Error(result.message);
+
+        if (result.success) {
+            window.location.href = result.redirect; // Redirect manually
+        } else {
+            throw new Error(result.message);
+        }
 
     } catch (error) {
         Swal.fire({
@@ -100,6 +99,7 @@
         });
     }
 });
+
   </script>
 </body>
 </html>

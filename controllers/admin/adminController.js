@@ -20,39 +20,55 @@ const loadLogin = async (req,res)=>{
 
 const login = async (req, res) => {
     try {
-        const { name, password } = req.body
-     
-        const admin = await User.findOne({ name, isAdmin: true })
+        const { name, password } = req.body;
+
+        const admin = await User.findOne({ name, isAdmin: true });
         if (!admin) {
             console.log("Admin not found");
-            return res.status(401).json({ message: "Invalid admin credentials" })
+            return res.status(401).json({ message: "Invalid admin credentials" });
         }
-        const passwordMatch = await bcrypt.compare(password, admin.password)
-        if (passwordMatch) {
-            console.log("Login successful")
-            req.session.admin = true;
-            return res.render("dashboard")
-        } else {
-            console.log("Password not matching")
-            return res.status(401).json({ message: "Invalid admin credentials" })
-        }
-    } catch (error) {
-        console.error("Admin login error", error)
-        return res.status(500).json({ message: "An error occurred during login" })
-    }
-}
 
-const loadDashboard = async (req,res)=>{
-    console.log(req.session.admin)
-    if(req.session.admin){
-        
-        try {
-            res.render("dashboard")
-        } catch (error) {
-            res.redirect("/pageerror")
+        const passwordMatch = await bcrypt.compare(password, admin.password);
+        if (!passwordMatch) {
+            console.log("Password not matching");
+            return res.status(401).json({ message: "Invalid admin credentials" });
         }
+
+        console.log("Login successful");
+
+        req.session.admin = true; 
+
+        // Make sure session is saved before redirecting
+        req.session.save((err) => {
+            if (err) {
+                console.error("Session save error:", err);
+                return res.status(500).json({ message: "Login failed" });
+            }
+            res.json({ success: true, redirect: "/admin/dashboard" });
+        });
+
+    } catch (error) {
+        console.error("Admin login error", error);
+        return res.status(500).json({ message: "An error occurred during login" });
     }
-}
+};
+
+
+
+const loadDashboard = async (req, res) => {
+    console.log("Admin session status:", req.session.admin);
+
+    if (!req.session.admin) {
+        return res.redirect("/admin/login"); 
+    }
+
+    try {
+        res.render("dashboard");
+    } catch (error) {
+        res.redirect("/pageerror");
+    }
+};
+
 
 const logout = async (req, res) => {
     try {
