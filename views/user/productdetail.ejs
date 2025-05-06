@@ -712,6 +712,25 @@
                                       <span class="discount-amount text-success fw-bold">
                                           (You Save ₹<%= spec.discountPrice.toLocaleString('en-IN') %>!)
                                       </span>
+                                      <% if (productOfferData?.offerName) { %>
+                                        <span class="discount-amount text-success fw-bold">
+                                          (OFFER NAME : <%= productOfferData.offerName %>)
+                                        </span>
+                                        <span class="discount-amount text-success fw-bold">
+                                          <%= productOfferData.discountValue %>% OFFER
+                                        </span>
+                                      <% } %>
+                                      
+                                      <% if (categoryOfferData?.offerName) { %>
+                                        <span class="discount-amount text-success fw-bold">
+                                          (OFFER NAME : <%= categoryOfferData.offerName %>)
+                                        </span>
+                                        <span class="discount-amount text-success fw-bold">
+                                          <%= categoryOfferData.discountValue %>% OFFER
+                                        </span>
+                                      <% } %>
+                                      
+
                                   <% } %>
                               </div>
                           </button>

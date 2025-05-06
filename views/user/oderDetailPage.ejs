@@ -391,7 +391,7 @@
 				
     
                 <!-- Payment Alert -->
-                <% if (orderData.paymentStatus === 'pending') { %>
+                <% if (orderData.paymentStatus === 'pending' && orderData.status !== "Cancelled") { %>
 					<button class="payment-alert p-3 m-3 d-flex align-items-center border border-primary rounded"
 					  onclick="continuePayment('<%= orderData._id %>', '<%= orderData.payableAmount %>')">
 					  <i class="bi bi-exclamation-circle text-primary me-2"></i>

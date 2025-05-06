@@ -3,6 +3,7 @@ const Product = require("../../models/productSchema")
 const Brand = require("../../models/brandSchema")
 const Category = require("../../models/categorySchema")
 const StatusCode = require("../../constants/statusCode")
+const Offer = require("../../models/offerSchema")
 
 const productDetail = async (req, res) => {
     try {
@@ -38,15 +39,23 @@ const productDetail = async (req, res) => {
         const productOfferId = productData.productOffer?._id || null;
 
         
+        console.log("This is product offer", productOffer);
+        console.log("categoryOffer",categoryOffer)
+
+        let productOfferData;
+        let categoryOfferData;
+
         let appliedOffer, appliedOfferType, appliedOfferId;
         if (productOffer > categoryOffer) {
             appliedOffer = productOffer;
             appliedOfferType = "product";
             appliedOfferId = productOfferId;
+            productOfferData  = await Offer.findOne({_id:appliedOfferId})
         } else {
             appliedOffer = categoryOffer;
             appliedOfferType = "category";
             appliedOfferId = categoryOfferId;
+            categoryOfferData  = await Offer.findOne({_id:appliedOfferId})
         }
 
         
@@ -66,7 +75,9 @@ const productDetail = async (req, res) => {
             allProduct,
             appliedOffer,
             appliedOfferType, 
-            appliedOfferId,  
+            appliedOfferId,
+            productOfferData,
+            categoryOfferData
         });
 
     } catch (error) {
