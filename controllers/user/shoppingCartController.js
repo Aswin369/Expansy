@@ -440,7 +440,7 @@ const addOrderDetails = async (req, res) => {
         }
 
         
-        // await Cart.deleteOne({ userId });
+        await Cart.deleteOne({ userId });
 
         res.status(StatusCode.OK).json({
             success: true,
