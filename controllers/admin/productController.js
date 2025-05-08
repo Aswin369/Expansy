@@ -131,17 +131,13 @@ const getAllProducts = async (req, res) => {
         .populate("brand")
         .exec();
 
-       
-
         const count = await Product.countDocuments({
             productName: { $regex: new RegExp(".*" + search + ".*", "i") } 
         });
 
-      
         const category = await Category.find({ isListed: true })
         const brand = await Brand.find({ isBlocked: false })
-
-      
+        
         res.render("products", {
             data: productData,
             currentPage: page,
@@ -149,6 +145,7 @@ const getAllProducts = async (req, res) => {
             category: category,
             brand: brand,
             message:message
+            
         });
 
     } catch (error) {
@@ -160,16 +157,17 @@ const getAllProducts = async (req, res) => {
 
 const blockProduct = async (req, res) => {
     try {
-        const id = req.params.id; 
-
-        await Product.updateOne({ _id: id },{ $set: { isBlocked: true, status: "Discontinued"}});
-
-        res.redirect("/admin/products");
+      const id = req.params.id;
+      await Product.updateOne({ _id: id }, { $set: { isBlocked: true, status: "Discontinued" } });
+  
+    
+      res.status(200).json({ success: true, message: "Product blocked successfully" });
     } catch (error) {
-        console.error("Error blocking product:", error);
-        res.redirect("/pageerror");
+      console.error("Error blocking product:", error);
+      res.status(500).json({ success: false, message: "Internal Server Error" });
     }
-};
+  };
+  
 
 const UnBlockProduct = async (req, res) => {
     try {
@@ -177,7 +175,7 @@ const UnBlockProduct = async (req, res) => {
 
         await Product.updateOne({ _id: id },{ $set: { isBlocked: false, status: "Available"}});
 
-        res.redirect("/admin/products");
+        res.status(200).json({ success: true, message: "Product unblocked successfully" });
     } catch (error) {
         console.error("Error unblocking product:", error);
         res.redirect("/pageerror");
@@ -470,6 +468,27 @@ const editVariant = async(req,res)=>{
     }
 }
 
+const  searchController = async (req,res)=>{
+    try {
+        const searchTerm = req.query.term;
+        
+        // Create a regex pattern for case-insensitive search
+        const regex = new RegExp(searchTerm, 'i');
+        
+        // Find products that match the search term
+        const products = await Product.find({ productName: regex })
+            .populate('brand')
+            .populate('category')
+            .sort({ createdAt: -1 });
+        
+        // Return the results as JSON
+        res.json(products);
+    } catch (error) {
+        console.error('Error searching products:', error);
+        res.status(500).json({ error: 'An error occurred during search' });
+    }
+}
+
 module.exports = {
     getProductAddPage,
     addProducts,
@@ -483,5 +502,6 @@ module.exports = {
     updateStocks,
     deleteVariantEditProduct,
     getEditVariant,
-    editVariant
+    editVariant,
+    searchController
 }

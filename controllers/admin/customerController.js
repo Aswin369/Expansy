@@ -25,7 +25,7 @@ const customerInfo = async (req, res) => {
             .exec();
 
         
-        console.log("user data",userData)
+        
 
         const formattedUserData = userData.map(user => ({
             id: user._id,
@@ -34,7 +34,7 @@ const customerInfo = async (req, res) => {
             date: user.createdAt, 
             isBlocked: user.isBlocked,
         }));
-        console.log("jgyhyg",formattedUserData);
+        // console.log("jgyhyg",formattedUserData);
         
         const count = await User.countDocuments({
             isAdmin: false,
@@ -52,7 +52,7 @@ const customerInfo = async (req, res) => {
             currentPage: page,
             search
         });
-        console.log("askdfjaksjf")
+        
     } catch (error) {
         console.error("Error fetching customer data:", error);
         res.status(StatusCode.INTERNAL_SERVER_ERROR).send("Server Error");
@@ -60,30 +60,29 @@ const customerInfo = async (req, res) => {
 };
 
 
+// In customerController.js
+
 const customerBlocked = async (req, res) => {
     try {
-        let id = req.query.id; 
-        await User.updateOne({ _id: id }, { $set: { isBlocked: true } }); 
-        res.redirect("/admin/users");
+        const id = req.body.id;
+        await User.updateOne({ _id: id }, { $set: { isBlocked: true } });
+        res.json({ success: true });
     } catch (error) {
         console.error("Error blocking customer:", error.message);
-        res.redirect("/pageerror");
+        res.json({ success: false });
     }
 };
 
 const uncustomerBlocked = async (req, res) => {
     try {
-        let id = req.query.id; 
-        await User.updateOne({ _id: id }, { $set: { isBlocked: false } }); 
-        res.redirect("/admin/users"); 
+        const id = req.body.id;
+        await User.updateOne({ _id: id }, { $set: { isBlocked: false } });
+        res.json({ success: true });
     } catch (error) {
         console.error("Error unblocking customer:", error.message);
-        res.redirect("/pageerror");
+        res.json({ success: false });
     }
 };
-
-
-
 
 const customerdetail = async (req, res) => {
     try {
@@ -108,10 +107,67 @@ const customerdetail = async (req, res) => {
 };
 
 
+const searchCustomers = async (req, res) => {
+    try {
+      const search = req.query.search || '';
+      const page = parseInt(req.query.page) || 1;
+      const limit = 9;
+      
+      // Find customers matching search query
+      const userData = await User.find({
+        isAdmin: false,
+        $or: [
+          { name: { $regex: ".*" + search + ".*", $options: "i" } },
+          { email: { $regex: ".*" + search + ".*", $options: "i" } }
+        ]
+      })
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .exec();
+      
+      // Format customer data for response
+      const formattedUserData = userData.map(user => ({
+        id: user._id,
+        _id: user._id, // Include both id and _id for frontend compatibility
+        name: user.name,
+        email: user.email,
+        date: user.createdAt,
+        isBlocked: user.isBlocked
+      }));
+      
+      // Count total matching customers for pagination
+      const count = await User.countDocuments({
+        isAdmin: false,
+        $or: [
+          { name: { $regex: ".*" + search + ".*", $options: "i" } },
+          { email: { $regex: ".*" + search + ".*", $options: "i" } }
+        ]
+      });
+      
+      const totalPages = Math.ceil(count / limit);
+      
+      // Return JSON response with search results
+      res.json({
+        success: true,
+        data: formattedUserData,
+        currentPage: page,
+        totalPages: totalPages,
+        totalCustomers: count
+      });
+      
+    } catch (error) {
+      console.error("Error searching customers:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to search customers"
+      });
+    }
+  };
+
 module.exports = {
     customerInfo,
     customerBlocked,
     uncustomerBlocked,
     customerdetail,
-    
+    searchCustomers
 }

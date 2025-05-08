@@ -433,78 +433,63 @@
                                </div>
                                
                                <div>
-                                   <form class="app-search d-none d-md-block ms-2" method="GET" action="/admin/customers">
-                                        <div class="d-flex align-items-center">
-                                            <input type="search" class="form-control me-2" placeholder="Search..." autocomplete="off" value="">
-                                            <button type="button" class="btn btn-primary">Search</button>
-                                        </div>
-                                    </form>
-                                    
-                                   <div class="dropdown-menu dropdown-menu-end">
-                                       <!-- item-->
-                                       <a href="#!" class="dropdown-item">Download</a>
-                                       <!-- item-->
-                                       <a href="#!" class="dropdown-item">Export</a>
-                                       <!-- item-->
-                                       <a href="#!" class="dropdown-item">Import</a>
-                                   </div>
-                               </div>
+                                   <form id="customer-search-form" class="app-search d-none d-md-block ms-2">
+                                     <div class="d-flex align-items-center">
+                                       <input type="search" class="form-control me-2" id="search-input" placeholder="Search by name or email..." autocomplete="off" value="<%= search %>">
+                                       
+                                     </div>
+                                   </form>
+                                 </div>
                            </div>
                            <div>
-                               <div class="table-responsive">
+                              <div class="table-responsive">
                                    <table class="table align-middle mb-0 table-hover table-centered">
-                                        <thead class="bg-light-subtle">
-                                            <tr>
-                                                <th style="width: 20px;"></th>
-                                                <th>ID</th>
-                                                <th>Username</th>
-                                                <th>Email</th>
-                                                <th>Join Date</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <% for (let i = 0; i < data.length; i++) { %>
-                                            <tr>
-                                                <td></td>
-                                                <td><%= data[i].id %></td>
-                                                <td><%= data[i].name %></td>
-                                                <td><%= data[i].email %></td>
-                                                <td><%= new Date(data[i].date).toLocaleDateString() %></td> 
-                                                <td>
-                                                  <% if (data[i].isBlocked === false) { %>
-                                                       <div class="d-flex gap-2">
-                                                           <span 
-                                                               class="btn btn-danger text-white swal-confirm" 
-                                                               data-href="/admin/blockCustomer?id=<%= data[i].id %>" 
-                                                               data-action="block"
-                                                               style="text-decoration: none; cursor: pointer;">
-                                                               Block
-                                                           </span>
-                                                   <% } else { %>
-                                                           <span 
-                                                               class="btn btn-success text-white swal-confirm" 
-                                                               data-href="/admin/unblockCustomer?id=<%= data[i].id %>" 
-                                                               data-action="unblock"
-                                                               style="text-decoration: none; cursor: pointer;">
-                                                               Unblock
-                                                           </span>
-                                                   <% } %>
-                                                   
-
-                                                            <button type="button" class="btn btn-warning">
-                                                                 <a href="/admin/customerdetails?id=<%= data[i].id %>" 
-                                                                      style="text-decoration: none; color: white;">
-                                                                      View
-                                                                 </a>
-                                                            </button>
-                                                   </div>
-                                                </td>
-                                            </tr>
-                                            <% } %>
-                                        </tbody>
-                                    </table>                                    
-                               </div>
+                                     <thead class="bg-light-subtle">
+                                       <tr>
+                                         <th style="width: 20px;"></th>
+                                         <th>ID</th>
+                                         <th>Username</th>
+                                         <th>Email</th>
+                                         <th>Join Date</th>
+                                         <th>Actions</th>
+                                       </tr>
+                                     </thead>
+                                     <tbody id="customer-table-body">
+                                       <% for (let i = 0; i < data.length; i++) { %>
+                                       <tr>
+                                         <td></td>
+                                         <td><%= data[i].id %></td>
+                                         <td><%= data[i].name %></td>
+                                         <td><%= data[i].email %></td>
+                                         <td><%= new Date(data[i].date).toLocaleDateString() %></td> 
+                                         <td id="customer-action-<%= data[i]._id %>">
+                                           <% if (!data[i].isBlocked) { %>
+                                             <button 
+                                               class="btn btn-danger text-white ajax-block-btn" 
+                                               data-id="<%= data[i].id %>" 
+                                               data-action="block">
+                                               Block
+                                             </button>
+                                           <% } else { %>
+                                             <button 
+                                               class="btn btn-success text-white ajax-block-btn" 
+                                               data-id="<%= data[i].id %>" 
+                                               data-action="unblock">
+                                               Unblock
+                                             </button>
+                                           <% } %>
+                                         
+                                           <button type="button" class="btn btn-warning">
+                                             <a href="/admin/customerdetails?id=<%= data[i]._id %>" style="text-decoration: none; color: white;">
+                                               View
+                                             </a>
+                                           </button>
+                                         </td>
+                                       </tr>
+                                       <% } %>
+                                     </tbody>
+                                   </table>
+                                 </div>
                                <!-- end table-responsive -->
                            </div>
                            <div class="card-footer border-top">
@@ -562,36 +547,264 @@
            <!-- Dashboard Js -->
            <script src="/assets/js/pages/dashboard.js"></script>
 
-           <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const buttons = document.querySelectorAll('.swal-confirm');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', function () {
-        const url = this.getAttribute('data-href');
-        const action = this.getAttribute('data-action');
-        const actionText = action === 'block' ? 'Block this customer?' : 'Unblock this customer?';
-
-        Swal.fire({
-          title: 'Are you sure?',
-          text: actionText,
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, proceed!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = url;
-          }
-        });
-      });
-    });
-  });
-</script>
-
            
+
+           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+           <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+           
+           <script>
+               $(document).ready(function () {
+                 $(document).on('click', '.ajax-block-btn', function () {
+                   const button = $(this);
+                   const userId = button.data('id');
+                   const parentCell = button.closest('td'); // Get the parent cell
+                   const parentCellId = parentCell.attr('id'); // Get the parent cell ID
+                   const action = button.data('action');
+                   const isBlocking = action === 'block';
+                   const url = isBlocking ? '/admin/blockCustomer' : '/admin/unblockCustomer';
+                   
+                   console.log("userId:", userId);
+                   console.log("parentCellId:", parentCellId);
+                   
+                   Swal.fire({
+                     title: 'Are you sure?',
+                     text: isBlocking ? 'Block this customer?' : 'Unblock this customer?',
+                     icon: 'warning',
+                     showCancelButton: true,
+                     confirmButtonText: 'Yes, proceed!',
+                     cancelButtonText: 'Cancel',
+                   }).then((result) => {
+                     if (result.isConfirmed) {
+                       $.ajax({
+                         type: 'POST',
+                         url: url,
+                         data: { id: userId },
+                         success: function (response) {
+                           if (response.success) {
+                             // Create new block/unblock button based on the action
+                             const newBlockBtn = $('<button>', {
+                               class: isBlocking ? 'btn btn-success text-white ajax-block-btn' : 'btn btn-danger text-white ajax-block-btn',
+                               'data-id': userId,
+                               'data-action': isBlocking ? 'unblock' : 'block',
+                               text: isBlocking ? 'Unblock' : 'Block'
+                             });
+                             
+                             // Create new view button
+                             const newViewBtn = $('<button>', {
+                               type: 'button',
+                               class: 'btn btn-warning ml-2'
+                             }).append(
+                               $('<a>', {
+                                 href: `/admin/customerdetails?id=${parentCellId.replace('customer-action-', '')}`,
+                                 style: 'text-decoration: none; color: white;',
+                                 text: 'View'
+                               })
+                             );
+                             
+                             // Clear the cell and append the new buttons
+                             parentCell.empty().append(newBlockBtn).append(' ').append(newViewBtn);
+                             
+                             // Log the success message
+                             console.log("Customer status updated successfully");
+                             
+                             Swal.fire('Success', response.message || 'Customer status updated.', 'success');
+                           } else {
+                             Swal.fire('Error', response.message || 'Failed to update status.', 'error');
+                           }
+                         },
+                         error: function (xhr) {
+                           const errorMsg = xhr.responseJSON?.message || 'Something went wrong.';
+                           Swal.fire('Error', errorMsg, 'error');
+                         }
+                       });
+                     }
+                   });
+                 });
+               });
+               </script>
+
+<script>
+     $(document).ready(function() {
+       // Search functionality
+       $('#search-button').on('click', function() {
+         performSearch();
+       });
+       
+       // Search on Enter key
+       $('#search-input').on('keypress', function(e) {
+         if (e.which === 13) {
+           e.preventDefault();
+           performSearch();
+         }
+       });
+       
+       function performSearch() {
+         const searchQuery = $('#search-input').val().trim();
+         const currentPage = `<%= currentPage %>` || 1;
+         
+         // Show loading indicator
+         $('#customer-table-body').html('<tr><td colspan="6" class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></td></tr>');
+         
+         $.ajax({
+           url: '/admin/search-customers',
+           method: 'GET',
+           data: {
+             search: searchQuery,
+             page: currentPage
+           },
+           success: function(response) {
+             if (response.success) {
+               // Update table with search results
+               updateCustomerTable(response.data, response.currentPage, response.totalPages);
+               
+               // Update pagination
+               updatePagination(response.currentPage, response.totalPages, searchQuery);
+               
+               // Update URL to reflect search (for bookmarking)
+               updateURLWithSearchParams(searchQuery, response.currentPage);
+             } else {
+               $('#customer-table-body').html('<tr><td colspan="6" class="text-center">No results found</td></tr>');
+             }
+           },
+           error: function(xhr) {
+             console.error('Search error:', xhr);
+             
+             // Show error message
+             Swal.fire({
+               title: 'Error',
+               text: 'Failed to perform search. Please try again.',
+               icon: 'error'
+             });
+             
+             // Restore table with default data
+             $('#customer-table-body').html('<tr><td colspan="6" class="text-center">Error loading data</td></tr>');
+           }
+         });
+       }
+       
+       function updateCustomerTable(customers, currentPage, totalPages) {
+         const tableBody = $('#customer-table-body');
+         tableBody.empty();
+         
+         if (customers.length === 0) {
+           tableBody.html('<tr><td colspan="6" class="text-center">No customers found</td></tr>');
+           return;
+         }
+         
+         $.each(customers, function(index, customer) {
+           const row = $('<tr>');
+           
+           // Add cells
+           row.append($('<td>')); // Empty first column
+           row.append($('<td>').text(customer.id));
+           row.append($('<td>').text(customer.name));
+           row.append($('<td>').text(customer.email));
+           row.append($('<td>').text(new Date(customer.date).toLocaleDateString()));
+           
+           // Actions cell
+           const actionsCell = $('<td>').attr('id', 'customer-action-' + customer._id);
+           
+           // Create block/unblock button
+           const blockBtn = $('<button>', {
+             class: customer.isBlocked ? 'btn btn-success text-white ajax-block-btn' : 'btn btn-danger text-white ajax-block-btn',
+             'data-id': customer.id,
+             'data-action': customer.isBlocked ? 'unblock' : 'block',
+             text: customer.isBlocked ? 'Unblock' : 'Block'
+           });
+           
+           // Create view button
+           const viewBtn = $('<button>', {
+             type: 'button',
+             class: 'btn btn-warning ml-2'
+           }).append(
+             $('<a>', {
+               href: '/admin/customerdetails?id=' + customer._id,
+               style: 'text-decoration: none; color: white;',
+               text: 'View'
+             })
+           );
+           
+           // Add buttons to cell
+           actionsCell.append(blockBtn).append(' ').append(viewBtn);
+           row.append(actionsCell);
+           
+           // Add row to table
+           tableBody.append(row);
+         });
+       }
+       
+       function updatePagination(currentPage, totalPages, searchQuery) {
+         const pagination = $('.pagination');
+         pagination.empty();
+         
+         for (let i = 1; i <= totalPages; i++) {
+           const pageItem = $('<li>', {
+             class: 'page-item' + (i === currentPage ? ' active' : '')
+           });
+           
+           const pageLink = $('<a>', {
+             class: 'page-link',
+             href: '?page=' + i + (searchQuery ? '&search=' + searchQuery : ''),
+             text: i
+           });
+           
+           // Add click event for pagination
+           pageLink.on('click', function(e) {
+             e.preventDefault();
+             loadPage(i, searchQuery);
+           });
+           
+           pageItem.append(pageLink);
+           pagination.append(pageItem);
+         }
+       }
+       
+       function loadPage(page, searchQuery) {
+         $.ajax({
+           url: '/admin/search-customers',
+           method: 'GET',
+           data: {
+             search: searchQuery || '',
+             page: page
+           },
+           success: function(response) {
+             if (response.success) {
+               updateCustomerTable(response.data, response.currentPage, response.totalPages);
+               updatePagination(response.currentPage, response.totalPages, searchQuery);
+               updateURLWithSearchParams(searchQuery, response.currentPage);
+             }
+           },
+           error: function(xhr) {
+             console.error('Page load error:', xhr);
+             Swal.fire({
+               title: 'Error',
+               text: 'Failed to load page. Please try again.',
+               icon: 'error'
+             });
+           }
+         });
+       }
+       
+       function updateURLWithSearchParams(searchQuery, page) {
+         if (history.pushState) {
+           const newUrl = window.location.protocol + "//" + window.location.host + 
+                          window.location.pathname + 
+                          '?page=' + page + 
+                          (searchQuery ? '&search=' + encodeURIComponent(searchQuery) : '');
+           window.history.pushState({ path: newUrl }, '', newUrl);
+         }
+       }
+     });
+     </script>
+               
+               <script>
+                    function confirmAction(url, action) {
+                        const actionText = action === 'block' ? 'block' : 'unblock';
+                        if (confirm(`Are you sure you want to ${actionText} this product?`)) {
+                            window.location.href = url;
+                        }
+                    }
+                    </script>
            </body>
            
            

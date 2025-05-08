@@ -419,8 +419,9 @@
                                                          <td><%= category.createdAt %></td>
                                                          <td><%= category.updatedAt %></td>
                                                          <td>
-                                                           <% if (category.status === "true") { %>
+                                                           <% if (category.status == "true") { %>
                                                            <span class="badge bg-success">Listed</span>
+
                                                            <% } else { %>
                                                            <span class="badge bg-danger">Unlisted</span>
                                                            <% } %>
@@ -433,14 +434,21 @@
                                                                  </a>
                                                              </button>
                                                              <% if (category.status === "true") { %>
-                                                             <button class="btn btn-danger">
-                                                               <a href="/admin/listCategory?id=<%= category._id %>" class="text-white">Unlist</a>
-                                                             </button>
-                                                             <% } else { %>
-                                                             <button class="btn btn-success">
-                                                               <a href="/admin/unlistCategory?id=<%= category._id %>" class="text-white">List</a>
-                                                             </button>
-                                                             <% } %>
+                                                                 <!-- If category is listed (isListed: true), show the Unlist button -->
+                                                                 <button id="list-unlist-btn-<%= category._id %>" class="btn btn-danger" 
+                                                                   data-category-id="<%= category._id %>" 
+                                                                   data-action="unlist">
+                                                                   Unlist
+                                                                 </button>
+                                                               <% } else { %>
+                                                                 <!-- If category is unlisted (isListed: false), show the List button -->
+                                                                 <button id="list-unlist-btn-<%= category._id %>" class="btn btn-success" 
+                                                                   data-category-id="<%= category._id %>" 
+                                                                   data-action="list">
+                                                                   List
+                                                                 </button>
+                                                               <% } %>
+                                                               
                                                            </div>
                                                          </td>
                                                        </tr>
@@ -527,6 +535,110 @@
 
      <!-- App Javascript (Require in all Page) -->
      <script src="/assets/js/app.js"></script>
+     <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('click', function(event) {
+              const button = event.target.closest('[data-category-id][data-action]');
+              if (button) {
+                const categoryId = button.dataset.categoryId;
+                const action = button.dataset.action;
+                toggleCategoryStatus(categoryId, action);
+              }
+            });
+          });
+          
+          function toggleCategoryStatus(categoryId, action) {
+            if (!categoryId || !action) return;
+          
+            const url = `/admin/${action}Category`;
+            const actionText = action === 'list' ? 'list this category?' : 'unlist this category?';
+            const oppositeAction = action === 'list' ? 'unlist' : 'list';
+          
+            Swal.fire({
+              title: 'Are you sure?',
+              text: `Do you really want to ${actionText}`,
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                $.ajax({
+                  url: url,
+                  method: 'POST',
+                  data: { id: categoryId },
+                  headers: {
+                    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                  },
+                  success: function(response) {
+                    if (response.success) {
+                      Swal.fire({
+                        title: 'Success!',
+                        text: response.message || `Category has been ${action === 'list' ? 'listed' : 'unlisted'} successfully.`,
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6'
+                      }).then(() => {
+                        updateButtonState(categoryId, action, oppositeAction);
+                      });
+                    } else {
+                      Swal.fire({
+                        title: 'Error!',
+                        text: response.message || 'Operation failed.',
+                        icon: 'error',
+                        confirmButtonColor: '#d33'
+                      });
+                    }
+                  },
+                  error: function(xhr) {
+                    const errorMsg = xhr.responseJSON?.message || 'Something went wrong while updating category status.';
+                    Swal.fire({
+                      title: 'Error!',
+                      text: errorMsg,
+                      icon: 'error',
+                      confirmButtonColor: '#d33'
+                    });
+                  }
+                });
+              }
+            });
+          }
+          
+          function updateButtonState(categoryId, currentAction, newAction) {
+            const btn = document.getElementById(`list-unlist-btn-${categoryId}`);
+            if (!btn) return;
+          
+            // Update button style and text
+            if (currentAction === 'list') {
+              btn.classList.remove('btn-success');
+              btn.classList.add('btn-danger');
+              btn.textContent = 'Unlist';
+            } else {
+              btn.classList.remove('btn-danger');
+              btn.classList.add('btn-success');
+              btn.textContent = 'List';
+            }
+          
+            btn.dataset.action = newAction;
+          
+            // Update status badge
+            const badge = btn.closest('tr').querySelector('.badge');
+            if (badge) {
+              if (currentAction === 'list') {
+                badge.classList.remove('bg-danger');
+                badge.classList.add('bg-success');
+                badge.textContent = 'Listed';
+              } else {
+                badge.classList.remove('bg-success');
+                badge.classList.add('bg-danger');
+                badge.textContent = 'Unlisted';
+              }
+            }
+          }
+          </script>
+          
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 </body>
 

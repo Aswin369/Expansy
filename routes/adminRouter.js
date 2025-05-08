@@ -22,16 +22,17 @@ router.get("/dashboard",adminAuth,adminController.loadDashboard)
 router.get("/logout", adminController.logout)
 // Customer mangement
 router.get("/users",adminAuth,customerController.customerInfo)
-router.get("/blockCustomer",adminAuth,customerController.customerBlocked)
-router.get("/unblockCustomer",adminAuth,customerController.uncustomerBlocked)
+router.post("/blockCustomer", adminAuth, customerController.customerBlocked);
+router.post("/unblockCustomer", adminAuth, customerController.uncustomerBlocked);
 router.get("/customerdetails",adminAuth,customerController.customerdetail)
 router.get("/admin/customerdetails", adminAuth, customerController.customerdetail);
+router.get('/search-customers', adminAuth, customerController.searchCustomers);
 // Category management
 router.get("/category",adminAuth,categoryController.categoryInfo)
 router.get("/addCategory", adminAuth,categoryController.loadAddCategory)
 router.post("/addCategory", upload.single('image'),adminAuth, categoryController.addCategory);
-router.get('/listCategory', adminAuth,categoryController.getListCategory);
-router.get('/unlistCategory', adminAuth, categoryController.getUnlistCategory);
+router.post('/listCategory', adminAuth,categoryController.listCategory);
+router.post('/unlistCategory', adminAuth, categoryController.unlistCategory);
 router.get("/editCategory/:id", adminAuth, categoryController.getEditCategory)
 router.post("/editCategory/:id",upload.single('image'),adminAuth,categoryController.updateCategory)
 // Brand Management
@@ -55,6 +56,7 @@ router.put("/updateVariantStocks/:productId",adminAuth,productController.updateS
 router.delete("/deleteVariantFromEditProduct",adminAuth,productController.deleteVariantEditProduct)
 router.get("/getEditVariant",adminAuth,productController.getEditVariant)
 router.post("/editVariantStocks",adminAuth,productController.editVariant)
+router.get("/search-products",adminAuth, productController.searchController)
 // Variant Management
 router.get("/getVariant",adminAuth,variantController.getVariantList)
 router.get("/getAddVariant",adminAuth,variantController.getAddVariant)

@@ -34,7 +34,8 @@ const categoryInfo = async (req, res) => {
         status: category.isListed ? "true" : "false",
       }));
   
-      
+      console.log("category list", categoriesWithSerialNumbers)
+
       res.render("category-list", {
         cat: categoriesWithSerialNumbers,
         currentPage: page,
@@ -101,29 +102,31 @@ const loadAddCategory = async (req,res)=>{
     }
 }
 
-const getListCategory = async (req, res) => {
-    try {
-      const id = req.query.id;
+const unlistCategory = async (req, res) => {
+  try {
+    console.log("unlistCategory",req.body.id)
+    await Category.findByIdAndUpdate(req.body.id, { isListed: false });
+    // await Category.save();
+    res.json({ success: true, message: 'Category unlisted successfully' });
+    console.log("saved unlistCategory")
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Something went wrong' });
+  }
+};
 
-      await Category.updateOne({ _id: id }, { $set: { isListed: false } });
-      res.redirect("/admin/category");
-    } catch (error) {
-      console.error("Error in getListCategory:", error);
-      res.redirect("/pageerror");
-    }
-  };
-  
-  const getUnlistCategory = async (req, res) => {
-    try {
-      const id = req.query.id;
-    
-      await Category.updateOne({ _id: id }, { $set: { isListed: true } });
-      res.redirect("/admin/category");
-    } catch (error) {
-      console.error("Error in getUnlistCategory:", error);
-      res.redirect("/pageerror");
-    }
-  };
+// Set a category as listed (isListed: true)
+const listCategory = async (req, res) => {
+  try {
+    console.log("listCategory",req.body.id)
+    await Category.findByIdAndUpdate(req.body.id, { isListed: true });
+    // await Category.save();
+    res.json({ success: true, message: 'Category listed successfully' });
+    console.log("saved isListed")
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Something went wrong' });
+  }
+};
+
   
 const getEditCategory = async (req,res)=>{
     try {
@@ -180,8 +183,8 @@ module.exports = {
     categoryInfo,
     addCategory,
     loadAddCategory,
-    getListCategory,
-    getUnlistCategory,
+    listCategory,
+    unlistCategory,
     getEditCategory,
     updateCategory
 }
