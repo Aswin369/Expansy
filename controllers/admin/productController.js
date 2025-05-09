@@ -137,6 +137,8 @@ const getAllProducts = async (req, res) => {
 
         const category = await Category.find({ isListed: true })
         const brand = await Brand.find({ isBlocked: false })
+
+        
         
         res.render("products", {
             data: productData,
@@ -147,6 +149,7 @@ const getAllProducts = async (req, res) => {
             message:message
             
         });
+        
 
     } catch (error) {
 
@@ -472,16 +475,16 @@ const  searchController = async (req,res)=>{
     try {
         const searchTerm = req.query.term;
         
-        // Create a regex pattern for case-insensitive search
+        
         const regex = new RegExp(searchTerm, 'i');
         
-        // Find products that match the search term
+       
         const products = await Product.find({ productName: regex })
             .populate('brand')
             .populate('category')
             .sort({ createdAt: -1 });
         
-        // Return the results as JSON
+        
         res.json(products);
     } catch (error) {
         console.error('Error searching products:', error);

@@ -433,12 +433,19 @@
                                </div>
                                
                                <div>
-                                   <form id="customer-search-form" class="app-search d-none d-md-block ms-2">
-                                     <div class="d-flex align-items-center">
-                                       <input type="search" class="form-control me-2" id="search-input" placeholder="Search by name or email..." autocomplete="off" value="<%= search %>">
-                                       
-                                     </div>
-                                   </form>
+                                   <form class="app-search">
+                                        <div class="position-relative d-flex align-items-center">
+                                          <input 
+                                            type="search" 
+                                            class="form-control me-2" 
+                                            id="search-input"
+                                            placeholder="Search by category name..." 
+                                            autocomplete="off"
+                                          />
+                                          <button type="button" id="search-button" class="btn btn-primary">Search</button>
+                                        </div>
+                                      </form>
+                                      
                                  </div>
                            </div>
                            <div>

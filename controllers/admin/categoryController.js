@@ -178,6 +178,33 @@ const updateCategory = async (req, res) => {
   }
 }
 
+const searchCategory = async (req, res) => {
+  const query = req.query.q || '';
+  try {
+    const categoryData = await Category.find({
+      name: { $regex: query, $options: 'i' }
+    })
+      .sort({ createdAt: -1 })
+      .select("image name description createdAt updatedAt isListed");
+
+    const categoriesWithSerialNumbers = categoryData.map((category, index) => ({
+      _id: category._id,
+      no: index + 1,
+      image: category.image || "/assets/images/default.png",
+      name: category.name,
+      description: category.description,
+      createdAt: category.createdAt.toLocaleDateString(),
+      updatedAt: category.updatedAt.toLocaleDateString(),
+      status: category.isListed ? "true" : "false",
+    }));
+
+    res.json({ categories: categoriesWithSerialNumbers });
+  } catch (error) {
+    console.error('Search error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 
 module.exports = {
     categoryInfo,
@@ -186,5 +213,6 @@ module.exports = {
     listCategory,
     unlistCategory,
     getEditCategory,
-    updateCategory
+    updateCategory,
+    searchCategory
 }
