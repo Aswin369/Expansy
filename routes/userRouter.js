@@ -71,6 +71,7 @@ router.get("/process-checkout",userAuth, shoppingCartController.loadCheckOutPage
 router.get("/checkout",userAuth, shoppingCartController.loadplaceOrder)
 router.post("/placeOrder",userAuth, shoppingCartController.addOrderDetails)
 router.get("/ordersuccess",userAuth, shoppingCartController.loadSuccessPage)
+router.get("/orderpaymentfailed",userAuth,shoppingCartController.getOrderPaymentFailed)
 router.post("/createRazorpayOrder",userAuth,shoppingCartController.razorpayOrder)
 router.post("/verifyPayment",userAuth,shoppingCartController.verifiyPayment)
 router.post("/applyCoupon",userAuth,shoppingCartController.applyCoupon)

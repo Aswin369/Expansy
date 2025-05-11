@@ -446,7 +446,7 @@
                                                   <table class="table align-middle mb-0 table-hover table-centered">
                                                        <thead class="bg-light-subtle">
                                                             <tr>
-                                                                 <th>Transaction ID</th>
+                                                                 <th>No. </th>
                                                                  <th>Customer</th>
                                                                  <th>Date</th>
                                                                  <th>Transaction Type</th>
@@ -455,10 +455,10 @@
                                                             </tr>
                                                        </thead>
                                                        <tbody>
-                                                            <%walletTransactionData.forEach((data)=>{%>
+                                                            <%walletTransactionData.forEach((data,index)=>{%>
                                                             <tr>
                                                                  <td>
-                                                                      <%= data._id%>
+                                                                      <%= index+1%>
                                                                  </td>
                                                                  <td>
                                                                      <a href="#!" class="link-primary fw-medium"><%= data.userId.name%></a>

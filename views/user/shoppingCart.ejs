@@ -1109,16 +1109,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    const redirectUrl = new URL(data.redirectUrl, window.location.origin);
-                    if (!redirectUrl.searchParams.has('cartId')) {
-                        redirectUrl.searchParams.append('cartId', cartId);
-                    }
-                    window.location.href = redirectUrl.toString();
-                } else {
-                    showMessage(data.message || 'Checkout failed', 'error');
-                }
-            })
+    if (data.success) {
+        const redirectUrl = new URL(data.redirectUrl, window.location.origin);
+        if (!redirectUrl.searchParams.has('cartId')) {
+            redirectUrl.searchParams.append('cartId', cartId);
+        }
+        window.location.href = redirectUrl.toString();
+    } else {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: data.message || "Checkout failed"
+        });
+    }
+})
+
             .catch(error => {
                 console.error('Error during checkout:', error);
                 showMessage('Network error. Please try again.', 'error');

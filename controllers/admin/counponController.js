@@ -125,8 +125,7 @@ const updateCoupon = async(req,res)=>{
     try {
         console.log("sdlfjklas", req.body)
         const {startDate, endDate, couponCode, couponLimits, minDiscountValue, maxDiscountValue, discountValue, couponId} = req.body
-        // const formattedStartDate = new Date(startDate);
-        // const formattedEndDate = new Date(endDate);
+        
         console.log("enddate", startDate)
         console.log("start date", endDate)
         if(!couponId){

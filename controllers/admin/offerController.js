@@ -75,7 +75,7 @@ const createOffer = async (req, res) => {
         const savedOffer = await offerData.save();
         console.log("Offer saved successfully:", savedOffer);
 
-        // Update the product or category with the offer ID
+        
         if (offer_type === "product") {
             console.log("Applying product offer...");
             const productOffer = await Product.findByIdAndUpdate(

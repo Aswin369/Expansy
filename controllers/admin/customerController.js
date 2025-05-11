@@ -20,6 +20,7 @@ const customerInfo = async (req, res) => {
                 { email: { $regex: ".*" + search + ".*", $options: "i" } }
             ]
         })
+            .sort({ createdAt: -1 })       
             .limit(limit)
             .skip((page - 1) * limit)
             .exec();
@@ -34,7 +35,7 @@ const customerInfo = async (req, res) => {
             date: user.createdAt, 
             isBlocked: user.isBlocked,
         }));
-        // console.log("jgyhyg",formattedUserData);
+      
         
         const count = await User.countDocuments({
             isAdmin: false,
@@ -60,7 +61,7 @@ const customerInfo = async (req, res) => {
 };
 
 
-// In customerController.js
+
 
 const customerBlocked = async (req, res) => {
     try {
@@ -113,7 +114,7 @@ const searchCustomers = async (req, res) => {
       const page = parseInt(req.query.page) || 1;
       const limit = 9;
       
-      // Find customers matching search query
+      
       const userData = await User.find({
         isAdmin: false,
         $or: [
@@ -125,17 +126,17 @@ const searchCustomers = async (req, res) => {
         .skip((page - 1) * limit)
         .exec();
       
-      // Format customer data for response
+    
       const formattedUserData = userData.map(user => ({
         id: user._id,
-        _id: user._id, // Include both id and _id for frontend compatibility
+        _id: user._id, 
         name: user.name,
         email: user.email,
         date: user.createdAt,
         isBlocked: user.isBlocked
       }));
       
-      // Count total matching customers for pagination
+     
       const count = await User.countDocuments({
         isAdmin: false,
         $or: [
@@ -146,7 +147,7 @@ const searchCustomers = async (req, res) => {
       
       const totalPages = Math.ceil(count / limit);
       
-      // Return JSON response with search results
+      
       res.json({
         success: true,
         data: formattedUserData,

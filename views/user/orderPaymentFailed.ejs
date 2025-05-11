@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Failed Animation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .animation-ctn {
+            text-align: center;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        @keyframes checkmark-circle {
+            0% { stroke-dashoffset: 480px }
+            100% { stroke-dashoffset: 960px }
+        }
+
+        @keyframes colored-circle { 
+            0% { opacity: 0 }
+            100% { opacity: 1 }
+        }
+
+        @keyframes crossmark {
+            0% { 
+                stroke-dashoffset: 60px;
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            100% { 
+                stroke-dashoffset: 0px;
+                opacity: 1;
+            }
+        }
+        
+        /* Ensure the cross stays visible after animation */
+        .icon--order-failed svg line.first-line,
+        .icon--order-failed svg line.second-line {
+            opacity: 1;
+        }
+
+        .icon--order-failed svg circle {
+            animation: checkmark-circle 0.6s ease-in-out backwards;
+        }
+        
+        .icon--order-failed svg circle#colored {
+            animation: colored-circle 0.6s ease-in-out 0.7s backwards;
+        }
+
+        .icon--order-failed svg line.first-line {
+            animation: crossmark 0.3s ease-in-out 0.8s backwards;
+        }
+
+        .icon--order-failed svg line.second-line {
+            animation: crossmark 0.3s ease-in-out 1s backwards;
+        }
+
+        ._failed {
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            padding: 45px;
+            width: 100%;
+            text-align: center;
+            margin: 40px auto;
+            border-bottom: solid 4px #dc3545;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        ._failed h2 {
+            margin-bottom: 12px;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-top: 10px;
+            color: #dc3545;
+        }
+
+        ._failed p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            color: #495057;
+            font-weight: 400;
+        }
+        
+        .home-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 30px;
+            background: linear-gradient(to right, #dc3545, #e83e8c);
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(220, 53, 69, 0.3);
+        }
+
+        .try-again-btn {
+            display: inline-block;
+            margin: 15px 10px 0;
+            padding: 12px 30px;
+            background: transparent;
+            color: #dc3545;
+            font-weight: 500;
+            font-size: 16px;
+            border: 1px solid #dc3545;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .try-again-btn:hover {
+            background-color: rgba(220, 53, 69, 0.1);
+            transform: translateY(-3px);
+        }
+        .order-id-box {
+            background: #f8f9fa;
+            border: 1px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 0 auto 25px;
+            display: block;
+            max-width: 250px;
+        }
+        
+        .order-id-box .label {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .order-id-box .value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212529;
+            letter-spacing: 1px;
+        }
+        
+        .buttons-container {
+            margin-top: 15px;
+            display: block;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message-box _failed" id="failed-message">
+            <div class="animation-ctn">
+                <div class="icon icon--order-failed svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100px" height="100px">  
+                        <g fill="none" stroke="#dc3545" stroke-width="2"> 
+                            <circle cx="50" cy="50" r="45" style="stroke-dasharray:480px, 480px; stroke-dashoffset: 960px;"></circle>
+                            <circle id="colored" fill="#dc3545" cx="50" cy="50" r="45" style="stroke-dasharray:480px, 480px; stroke-dashoffset: 960px;"></circle>
+                            <line class="first-line" x1="32" y1="32" x2="68" y2="68" stroke="white" stroke-width="8" style="stroke-dasharray:60px, 60px; stroke-dashoffset: 0px;"></line>
+                            <line class="second-line" x1="68" y1="32" x2="32" y2="68" stroke="white" stroke-width="8" style="stroke-dasharray:60px, 60px; stroke-dashoffset: 0px;"></line>
+                        </g> 
+                    </svg>
+                </div>
+            </div>
+            <h2>Payment Failed</h2>
+            <p>Your transaction could not be processed at this time.<br>Please check your payment details and try again.</p>
+
+            <div class="order-id-box">
+                <span class="label">Order ID</span>
+                <div class="value" id="order-id-display"><%= order%></div>
+            </div>
+            
+            <div class="buttons-container">
+                <a href="/ordersview/<%= id%>" class="try-again-btn">
+                    Go Order Detail Page
+                </a>
+                <a href="/shop" class="home-btn">
+                    Return Shop
+                </a>
+            </div>
+        </div> 
+    </div>
+</body>
+</html>

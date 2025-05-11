@@ -1263,48 +1263,57 @@ if (paymentMethodRadio.id === "payment1") {
   // ========== SUBMIT ORDER FUNCTION ==========
   function submitOrder(orderData) {
     fetch("/placeOrder", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(orderData),
-    })
-    .then((response) => {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(orderData),
+})
+  .then((response) => {
+    return response.json().then((data) => {
       if (!response.ok) {
-        return response.json().then((data) => {
-          throw new Error(data.message || "Network response was not ok");
-        });
+        throw data; // Now you get full object including discontinuedProducts
       }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("this data from backend",data);
-      Swal.fire({
-        title: "Order Placed Successfully!",
-        text: `Your order ID is ${data.orderId}. Thank you for shopping with us!`,
-        icon: "success",
-        confirmButtonText: "Continue",
-      });
+      return data;
+    });
+  })
+  .then((data) => {
+    console.log("this data from backend", data);
+    Swal.fire({
+      title: "Order Placed Successfully!",
+      text: `Your order ID is ${data.orderId}. Thank you for shopping with us!`,
+      icon: "success",
+      confirmButtonText: "Continue",
+    });
 
-      let orderId = data.orderId;
-      let paymentMethod = orderData.paymentMethod;
-      let id = data.id
-      if (paymentMethod === "ONLINE") {
-        handleOnlinePayment(payTotalAmount, orderId, id);
-      }else if(paymentMethod === "WALLET"){
-        WalletPayment(payTotalAmount, orderId, id)
-      }else {
-        window.location.href = `/ordersuccess?order=${orderId}&id=${id}`;
-      }
-    })
-    .catch((error) => {
+    let orderId = data.orderId;
+    let paymentMethod = orderData.paymentMethod;
+    let id = data.id;
+    if (paymentMethod === "ONLINE") {
+      handleOnlinePayment(payTotalAmount, orderId, id);
+    } else if (paymentMethod === "WALLET") {
+      WalletPayment(payTotalAmount, orderId, id);
+    } else {
+      window.location.href = `/ordersuccess?order=${orderId}&id=${id}`;
+    }
+  })
+  .catch((error) => {
+    if (error.discontinuedProducts) {
+      Swal.fire({
+        title: "Product Discontinued",
+        html: `The following product(s) are discontinued and cannot be ordered:<br><b>${error.discontinuedProducts.join(", ")}</b>`,
+        icon: "warning",
+        confirmButtonText: "OK",
+      });
+    } else {
       showAlert(
         "Error",
         error.message || "There was an error placing your order. Please try again.",
         "error"
       );
-      console.error("Error:", error);
-    });
+    }
+    console.error("Error:", error);
+  });
   }
 
 
@@ -1322,98 +1331,98 @@ if (paymentMethodRadio.id === "payment1") {
 
   // ========== HANDLE ONLINE PAYMENT ==========
   // Inside the handleOnlinePayment function, modify it like this:
-function handleOnlinePayment(amount, orderId, id) {
-  
-    console.log("this is my handleonlinePatmekjdf", amount, orderId, id)
+  function handleOnlinePayment(amount, orderId, id) {
+  console.log("this is my handleonlinePatmekjdf", amount, orderId, id);
 
   const amountInPaise = Math.round(amount * 100);
-  
+
   fetch("/createRazorpayOrder", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ amount: amountInPaise }), // Send the original amount, let backend handle conversion
+    body: JSON.stringify({ amount: amountInPaise }),
   })
-  .then((response) => {
-    if (!response.ok) {
-      return response.json().then((data) => {
-        throw new Error(data.message || "Failed to create payment order");
-      });
-    }
-    return response.json();
-  })
-  .then((data) => {
-    console.log('Razorpay order data:', data);
-    
-    // Initialize Razorpay checkout
-    const options = {
-      key: "rzp_test_Ar7OJGh05M40uW",
-      amount: data.amount, // Use the amount directly from the response, don't multiply by 100
-      currency: data.currency || "INR",
-      name: "Your Store Name",
-      description: "Purchase Payment",
-      order_id: data.id,
-      handler: function(response) {
-        // Verify payment signature
-        verifyPayment(response, orderId, id);
-      },
-      prefill: {
-        name: data.customerName || "",
-        email: data.customerEmail || "",
-        contact: data.customerPhone || "",
-      },
-      theme: {
-        color: "#3399cc",
-      },
-      modal: {
-        ondismiss: function() {
-          showAlert(
-            "Payment Cancelled",
-            "Your payment process was cancelled. Please try again.",
-            "info"
-          );
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((data) => {
+          throw new Error(data.message || "Failed to create payment order");
+        });
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Razorpay order data:", data);
+
+      const options = {
+        key: "rzp_test_Ar7OJGh05M40uW",
+        amount: data.amount,
+        currency: data.currency || "INR",
+        name: "Your Store Name",
+        description: "Purchase Payment",
+        order_id: data.id,
+        handler: function (response) {
+          verifyPayment(response, orderId, id); // Payment success goes here
         },
-      },
-    };
+        prefill: {
+          name: data.customerName || "",
+          email: data.customerEmail || "",
+          contact: data.customerPhone || "",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+        modal: {
+          ondismiss: function () {
+            showAlert(
+              "Payment Cancelled",
+              "Your payment process was cancelled. Redirecting...",
+              "info"
+            );
+            setTimeout(() => {
+              window.location.href = `/orderpaymentfailed?order=${orderId}&id=${id}`;
+            }, 2000);
+          },
+        },
+      };
 
-    // Make sure Razorpay is properly loaded
-    if (typeof Razorpay === "undefined") {
+      if (typeof Razorpay === "undefined") {
+        showAlert(
+          "Payment Error",
+          "Payment gateway is not loaded properly. Please refresh the page and try again.",
+          "error"
+        );
+        return;
+      }
+
+      try {
+        const razorpayCheckout = new Razorpay(options);
+        razorpayCheckout.open();
+      } catch (err) {
+        console.error("Razorpay initialization error:", err);
+        showAlert(
+          "Payment Error",
+          "Failed to initialize payment gateway. Please try again later.",
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
       showAlert(
-        "Payment Error",
-        "Payment gateway is not loaded properly. Please refresh the page and try again.",
+        "Error",
+        error.message || "There was an error creating your payment. Please try again.",
         "error"
       );
-      return;
-    }
-
-    try {
-      const razorpayCheckout = new Razorpay(options);
-      razorpayCheckout.open();
-    } catch (err) {
-      console.error("Razorpay initialization error:", err);
-      showAlert(
-        "Payment Error",
-        "Failed to initialize payment gateway. Please try again later.",
-        "error"
-      );
-    }
-  })
-  .catch((error) => {
-    showAlert(
-      "Error",
-      error.message || "There was an error creating your payment. Please try again.",
-      "error"
-    );
-    console.error("Error:", error);
-  });
+      console.error("Error:", error);
+    });
 }
+
 
   // ========== VERIFY PAYMENT ==========
   function verifyPayment(response, orderId, id) {
   // First log the response for debugging
   console.log("Payment verification response:", response);
-  
+
   // Check if we have required fields
   if (!response.razorpay_payment_id || !response.razorpay_order_id || !response.razorpay_signature) {
     showAlert(
@@ -1421,6 +1430,13 @@ function handleOnlinePayment(amount, orderId, id) {
       "Missing payment information. Please contact support.",
       "error"
     );
+    
+    // Redirect after 2 seconds
+    console.log("payment failed one")
+    setTimeout(() => {
+      window.location.href = `/orderpaymentfailed?order=${orderId}&id=${id}`;
+    }, 2000);
+
     return;
   }
 
@@ -1437,9 +1453,9 @@ function handleOnlinePayment(amount, orderId, id) {
       id: id
     }),
   })
-  .then(response => response.json()) 
-   .then((data) => {
-    console.log("dfgdfgsdfgsf", data)
+  .then(response => response.json())
+  .then((data) => {
+    console.log("dfgdfgsdfgsf", data);
     if (data) {
       window.location.href = `/ordersuccess?order=${orderId}&id=${id}`;
     } else {
@@ -1448,9 +1464,15 @@ function handleOnlinePayment(amount, orderId, id) {
         data.message || "Your payment could not be verified. Please contact support.",
         "error"
       );
+      console.log("payment failed two",data.message)
+      // Redirect after 2 seconds
+      setTimeout(() => {
+        window.location.href = `/orderpaymentfailed?order=${orderId}&id=${id}`;
+      }, 2000);
     }
-})
+  });
 }
+
 
   // Initialize calculations on page load
   calculateTotals();
@@ -1641,6 +1663,26 @@ function handleOnlinePayment(amount, orderId, id) {
           }
         }
       });
+    </script>
+    <script>
+      async function handleLogout() {
+        try {
+          const response = await fetch("/logout",{
+            method: "GET",
+            credentials: "include"
+          })
+          if(response.ok){
+            console.log("Successfully logged out")
+            window.location.href = "/login"
+          }else{
+            const result = await response.json()
+            alert(result.message || "Failed to logout. Please try again")
+          }
+        } catch (error) {
+          alert("An unexpected error occurred")
+          console.log("Error in handleLogout",error)
+        }
+      }
     </script>
     <script src="js/main.js"></script>
   </body>

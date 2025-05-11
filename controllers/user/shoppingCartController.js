@@ -70,9 +70,11 @@ const productAddToCart = async (req, res) => {
 
         
         const productDetail = await Product.findOne({ _id: productId });
-        if (!productDetail) {
-            return res.status(StatusCode.NOT_FOUND).json({ success: false, message: "Product not found" });
-        }
+        console.log("asdlfjalsdf1", productDetail)
+       if (productDetail.status == "Discontinued") {
+        console.log("asdlfjalsdf2", productDetail)
+            return res.status(StatusCode.BAD_REQUEST).json({ success: false, message: "The product is discontinued" });
+}
 
         const spec = productDetail.specification.find(s => s._id.toString() === selectedSpecId)
         if (!spec) {
@@ -145,8 +147,6 @@ const productAddToCart = async (req, res) => {
         res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ success: false, message: "Internal Server Error" });
     }
 };
-
-
 
 const deleteProductFromCart = async(req,res)=>{
     try {
@@ -245,15 +245,36 @@ const loadplaceOrder = async (req, res) => {
 
 
 
-const loadCheckOutPage = async(req,res)=>{
+const loadCheckOutPage = async (req, res) => {
     try {
         const { cartId } = req.query;
-        res.status(StatusCode.OK).json({ success: true, redirectUrl: `/checkout?cartId=${cartId}`});
+
+        const cart = await Cart.findById(cartId).populate("items.productId");
+
+        if (!cart) {
+            return res.status(StatusCode.NOT_FOUND).json({ success: false, message: "Cart not found" });
+        }
+
+        
+        const discontinuedProduct = cart.items.find(item => item.productId.status === "Discontinued");
+
+        console.log("discontinuedProduct",discontinuedProduct)
+
+        if (discontinuedProduct) {
+            return res.status(StatusCode.BAD_REQUEST).json({
+                success: false,
+                message: `The product "${discontinuedProduct.productId.productName}" is discontinued. Please remove it from cart.`
+            });
+        }
+
+        res.status(StatusCode.OK).json({ success: true, redirectUrl: `/checkout?cartId=${cartId}` });
+
     } catch (error) {
-        console.error("This error occured in loadCheckOutPage",error)
-        res.redirect("/pageerror")
+        console.error("This error occurred in loadCheckOutPage:", error);
+        res.redirect("/pageerror");
     }
-}
+};
+
 
 const addOrderDetails = async (req, res) => {
     try {
@@ -272,7 +293,7 @@ const addOrderDetails = async (req, res) => {
 
         console.log("Request Body:", req.body);
 
-        // Fetch delivery address
+       
         const addressData = await Address.findOne(
             {
                 userId: new mongoose.Types.ObjectId(userId),
@@ -287,7 +308,7 @@ const addOrderDetails = async (req, res) => {
 
         const deliveryAddress = { ...addressData.address[0] };
 
-        // Check coupon validity
+      
         if (couponCode) {
             const coupon = await Coupon.findOne({ _id: couponId, code: couponCode, isActive: true });
             if (!coupon) {
@@ -301,15 +322,15 @@ const addOrderDetails = async (req, res) => {
             await Coupon.findByIdAndUpdate(coupon._id, { $inc: { currentUsage: 1, maxUsage: -1 } });
         }
 
-        // Get cart details
+       
         const cartDetails = await Cart.findOne({ userId });
         if (!cartDetails || !cartDetails.items) {
             return res.status(400).json({ success: false, message: "Cart is empty" });
         }
 
         let outOfStockProducts = [];
-
-        // Validate stock availability
+        let discontinuedProducts = [];
+       
         const orderProducts = await Promise.all(
             items.map(async (item, index) => {
                 const cartItem = cartDetails.items.find(cart => cart.productId.toString() === item.productId);
@@ -321,6 +342,10 @@ const addOrderDetails = async (req, res) => {
 
                 if (!product) {
                     throw new Error(`Product not found for ID ${item.productId}`);
+                }
+
+                if (product.status === "Discontinued") {
+                    discontinuedProducts.push(product.productName);
                 }
 
                 const spec = product.specification.find(
@@ -345,6 +370,14 @@ const addOrderDetails = async (req, res) => {
             })
         );
 
+        if (discontinuedProducts.length > 0) {
+            return res.status(StatusCode.BAD_REQUEST).json({
+                success: false,
+                message: "Some products are discontinued",
+                discontinuedProducts
+            });
+        }
+
         if (outOfStockProducts.length > 0) {
             return res.status(StatusCode.NOT_FOUND).json({
                 success: false,
@@ -353,7 +386,7 @@ const addOrderDetails = async (req, res) => {
             });
         }
 
-        // Handle wallet payment
+       
         let paymentStatus = 'pending';
         let finalPaymentMethod = paymentMethod === "ONLINE" ? "razorpay" : paymentMethod;
 
@@ -367,13 +400,13 @@ const addOrderDetails = async (req, res) => {
                 });
             }
 
-            // Deduct balance
+           
             wallet.balance -= payableAmount;
             await wallet.save();
 
             paymentStatus = 'paid';
 
-            // Save transaction (linked after order creation)
+           
             var walletTransaction = new Transaction({
                 walletId: wallet._id,
                 userId,
@@ -385,7 +418,10 @@ const addOrderDetails = async (req, res) => {
             await walletTransaction.save();
         }
 
-        // Create new order
+
+
+
+       
         const newOrder = new Order({
             userId,
             products: orderProducts,
@@ -402,13 +438,13 @@ const addOrderDetails = async (req, res) => {
 
         await newOrder.save();
 
-        // Link wallet transaction with order
+        
         if (paymentMethod === "Wallet" && walletTransaction) {
             walletTransaction.associatedOrder = newOrder._id;
             await walletTransaction.save();
         }
 
-        // Update product stock
+    
         for (const item of orderProducts) {
             const product = await Product.findById(item.productId);
 
@@ -459,18 +495,40 @@ const addOrderDetails = async (req, res) => {
 const loadSuccessPage = async(req,res)=>{
     try {
         const userId = req.session.user
-        const {order} = req.query
+        const {order, id} = req.query
+
+        console.log("alksjdfkljadf",req.query)
 
         console.log("dkasfhdjhfkajsdhfj",order)
+        console.log("dkasfhdjhfkajsdhfj",id)
         if(!userId){
             res.redirect("/login")
         }
         res.render("orderSuccess",{
-            order
+            order,
+            id
         })
     } catch (error) {
         console.error("This error occured in loadSuccess page", error)
         res.redirect("/pageerror")
+    }
+}
+
+const getOrderPaymentFailed = async(req,res)=>{
+    try {
+        const userId = req.session.user
+        if(!userId){
+            res.redirect("/login")
+        }
+        const {order, id} = req.query
+        console.log("dfsdfsd", order, id)
+        res.render("orderPaymentFailed",{
+            order,
+            id
+        })
+
+    } catch (error) {
+        console.error("The comes from getOrderPaymentFailed",error);
     }
 }
 
@@ -612,5 +670,6 @@ module.exports = {
     loadSuccessPage,
     razorpayOrder,
     verifiyPayment,
-    applyCoupon
+    applyCoupon,
+    getOrderPaymentFailed
 }

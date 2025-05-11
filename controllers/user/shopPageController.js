@@ -14,7 +14,7 @@ const getShopPage = async (req, res) => {
 
         console.log("Query params:", req.query);
 
-        // Brand filtering
+      
         if (req.query.brand && req.query.brand !== 'All') {
             const brandName = req.query.brand.trim();
             const brand = await Brand.findOne({
@@ -30,7 +30,7 @@ const getShopPage = async (req, res) => {
             }
         }
 
-        // Price range filtering (inside specification array)
+    
         if (req.query.price) {
             const priceRange = req.query.price;
             let minPrice, maxPrice;
@@ -46,13 +46,13 @@ const getShopPage = async (req, res) => {
                 maxPrice = max;
             }
 
-            // Make sure we have valid numbers
+         
             if (!isNaN(minPrice) && !isNaN(maxPrice)) {
                 queryObj['specification.0.salePrice'] = { $gte: minPrice, $lte: maxPrice };
             }
         }
 
-        // Category filtering
+      
         if (req.query.category && req.query.category !== 'All') {
             const categoryName = req.query.category.trim();
             const category = await Category.findOne({
@@ -68,7 +68,7 @@ const getShopPage = async (req, res) => {
             }
         }
 
-        // Search filtering
+        
         if (req.query.search) {
             queryObj.productName = {
                 $regex: new RegExp(req.query.search.trim(), 'i')
@@ -77,7 +77,7 @@ const getShopPage = async (req, res) => {
 
         console.log('Final Query Object:', queryObj);
 
-        // Count total products before applying pagination
+       
         const totalProducts = await Product.countDocuments(queryObj);
         const totalPages = Math.ceil(totalProducts / limit);
 
@@ -100,10 +100,10 @@ const getShopPage = async (req, res) => {
                 sortOption = { 'specification.0.salePrice': 1 };
                 break;
             default:
-                sortOption = { createdAt: -1 }; // Default to newest first
+                sortOption = { createdAt: -1 };
         }
 
-        // Fetch products with pagination and sorting
+       
         const products = await Product.find(queryObj)
             .populate('brand')
             .populate('category')
@@ -116,10 +116,10 @@ const getShopPage = async (req, res) => {
 
         console.log(`Found ${products.length} products for page ${page}`);
 
-        // Get all brands for the filter options
+      
         const allBrands = await Brand.find({ isBlocked: false });
 
-        // If AJAX request, return JSON response
+        
         if (req.query.ajax === 'true') {
             return res.json({
                 products: products,
@@ -131,7 +131,7 @@ const getShopPage = async (req, res) => {
             });
         }
 
-        // For regular page load, render the template
+        
         const activeFilters = {
             brand: req.query.brand || 'All',
             price: req.query.price || '',
