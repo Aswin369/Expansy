@@ -474,19 +474,48 @@
                                         <div class="card-body">
                                              <div class="mt-4 pt-3">
                                                  <h4 class="mb-1">
-                                                     <%= user.name %> 
+                                                     <span class="text-dark fw-semibold">Name:</span> <%= user.name || 'N/A' %> 
                                                      <i class="bx bxs-badge-check text-success align-middle"></i>
                                                  </h4>
                                                  <div class="mt-2">
-                                                     <a href="#!" class="link-primary fs-15">
-                                                         @<%= user.username || 'username' %>
-                                                     </a>
                                                      <p class="fs-15 mb-1 mt-1">
                                                          <span class="text-dark fw-semibold">Email:</span> <%= user.email || 'N/A' %>
                                                      </p>
                                                      <p class="fs-15 mb-0 mt-1">
                                                          <span class="text-dark fw-semibold">Phone:</span> <%= user.phone || 'N/A' %>
                                                      </p>
+                                                     <%if(user.isBlocked){%>
+                                                       <p class="fs-15 mb-0 mt-1"></p>
+                                                       <span class="text-dark fw-semibold">Status:</span> Banned
+                                                       </p>
+                                                       <%}else{%>
+                                                            <p class="fs-15 mb-0 mt-1"></p>
+                                                            <span class="text-dark fw-semibold">Status:</span> Allowed
+                                                            </p>
+                                                            <%}%>
+
+                                                       <%if(user.isAdmin){%>
+                                                            <p class="fs-15 mb-0 mt-1"></p>
+                                                       <span class="text-dark fw-semibold">Role:</span> Admin
+                                                       </p>
+                                                            <%}else{%>
+                                                                 <p class="fs-15 mb-0 mt-1"></p>
+                                                       <span class="text-dark fw-semibold">Role:</span> User
+                                                       </p>
+                                                                 <%}%>
+
+                                                                 <p class="fs-15 mb-0 mt-1">
+                                                         <span class="text-dark fw-semibold">Referred By:</span> <%= user.referredBy || 'N/A' %>
+                                                     </p>
+                                                       </p>
+                                                                 <p class="fs-15 mb-0 mt-1">
+                                                         <span class="text-dark fw-semibold">Referral Code:</span> <%= user.referralCode || 'N/A' %>
+                                                     </p>
+                                                       <p class="fs-15 mb-0 mt-1">
+    <span class="text-dark fw-semibold">Joined on:</span> 
+    <%= user.createdAt ? new Date(user.createdAt).toDateString() : 'N/A' %>
+</p>
+
                                                  </div>
                                              </div>
                                          </div>
@@ -501,16 +530,7 @@
                     <!-- End Container Fluid -->
 
                     <!-- ========== Footer Start ========== -->
-                    <footer class="footer">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 text-center">
-                                    <script>document.write(new Date().getFullYear())</script> &copy; Expansy. Created by <iconify-icon icon="iconamoon:heart-duotone" class="fs-18 align-middle text-danger"></iconify-icon> <a
-                                        href="https://1.envato.market/techzaa" class="fw-bold footer-text" target="_blank">Aswin Variyath</a>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
+                    
                     <!-- ========== Footer End ========== -->
 
                </div>

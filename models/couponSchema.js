@@ -42,6 +42,5 @@ const CouponSchema = mongoose.Schema({
     timestamps:true
 })
 
-const Order = mongoose.model("Coupon",CouponSchema)
-
-module.exports = Order
+const Coupon = mongoose.model("Coupon", CouponSchema);
+module.exports = Coupon;

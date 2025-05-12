@@ -888,28 +888,7 @@
         <!-- End Container Fluid -->
 
         <!-- ========== Footer Start ========== -->
-        <footer class="footer">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-12 text-center">
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                &copy; Larkon. Crafted by
-                <iconify-icon
-                  icon="iconamoon:heart-duotone"
-                  class="fs-18 align-middle text-danger"
-                ></iconify-icon>
-                <a
-                  href="https://1.envato.market/techzaa"
-                  class="fw-bold footer-text"
-                  target="_blank"
-                  >Techzaa</a
-                >
-              </div>
-            </div>
-          </div>
-        </footer>
+        
         <!-- ========== Footer End ========== -->
       </div>
       <!-- ==================================================== -->
@@ -958,18 +937,39 @@
 
         // Handle the discount value field to allow only numbers and not exceed 90%
         const discountValueField = document.getElementById("discount-value");
-        discountValueField.addEventListener("input", function (e) {
-          // Remove any non-numeric characters
-          this.value = this.value.replace(/[^\d]/g, "");
 
-          // Check if value exceeds 90
-          if (parseInt(this.value) > 90) {
-            this.value = "90";
-            addErrorMessage(this, "Discount cannot exceed 90%");
-          } else {
-            removeErrorMessage(this);
-          }
-        });
+discountValueField.addEventListener("input", function () {
+  // Remove all non-digit characters
+  let input = this.value.replace(/[^\d]/g, "");
+
+  // Disallow 0 or numbers starting with 0
+  if (input.startsWith("0")) {
+    this.value = "";
+    addErrorMessage(this, "Value cannot start with 0");
+    return;
+  }
+
+  // Parse number
+  const num = parseInt(input);
+
+  if (!isNaN(num)) {
+    if (num > 90) {
+      this.value = "90";
+      addErrorMessage(this, "Discount cannot exceed 90%");
+    } else if (num === 0) {
+      this.value = "";
+      addErrorMessage(this, "Discount must be at least 1%");
+    } else {
+      this.value = input;
+      removeErrorMessage(this);
+    }
+  } else {
+    this.value = "";
+    removeErrorMessage(this);
+  }
+});
+
+
 
         // Add percentage sign to discount value field
         window.addPercentageSign = function (input) {

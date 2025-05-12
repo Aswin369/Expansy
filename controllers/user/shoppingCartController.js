@@ -215,14 +215,19 @@ const loadplaceOrder = async (req, res) => {
         })
         
         console.log("cartTotal", cartTotal)
+
+//         const allCoupons = await Coupon.find();
+// console.log("All coupons:", allCoupons);
+
         
         const validCoupons = await Coupon.find({
-            isActive: true,
-            maxUsage:{$ne:0},
-            currentUsage: { $gte: 0 },
-            startDate: { $lte: new Date() },       
-            expirationDate: { $gte: new Date() }     
-          });
+  isActive: true,
+  maxUsage: { $ne: 0 },
+  currentUsage: { $gte: 0 },
+  startDate: { $lte: new Date() },
+  expirationDate: { $gte: new Date() }
+});
+
         
 
           console.log("coupons",validCoupons)
