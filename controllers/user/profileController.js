@@ -544,7 +544,7 @@ const cancelOrder = async (req, res) => {
     try {
         const userId = req.session.user;
         const { orderId, reason, totalAmountPrice } = req.body;
-        const amount = parseInt(totalAmountPrice);
+        const amount = parseInt(totalAmountPrice) - 50;
 
         const order = await Order.findById(orderId).populate("products.productId");
 
@@ -575,7 +575,7 @@ const cancelOrder = async (req, res) => {
             }
         }
 
-        if (order.paymentStatus === 'paid' || order.paymentStatus === 'success') {
+        if (order.paymentStatus === 'paid' || order.paymentStatus === 'Success') {
             let wallet = await Wallet.findOne({ userId });
 
             if (!wallet) {
@@ -603,8 +603,6 @@ const cancelOrder = async (req, res) => {
         res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ success: false, message: "Internal server error" });
     }
 };
-
-
 
 const returnRequest = async (req,res)=>{
     try {

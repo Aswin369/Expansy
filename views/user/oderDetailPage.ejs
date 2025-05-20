@@ -415,7 +415,7 @@
   const productCount = orderData.products.length || 1;
   const discountPerProduct = couponAmount / productCount;
   %>
-  console.log("<%= discountPerProduct%>")
+
                         <!-- Product 1 -->
                         <% orderData.products.forEach(product => { %>
 							 <% const discountedPrice = product.totalPrice - discountPerProduct;%>
