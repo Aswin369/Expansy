@@ -464,11 +464,13 @@ const loadOrderDetailPage = async (req, res) => {
 
 const deleteOrder = async(req,res)=>{
     try {
-        const {orderId, productId, quantity, specId, id, amount, reason} = req.query
+        const {orderId, productId, quantity, specId, id, amount, reason, discountPerProduct} = req.query
         console.log("dshka",req.query)
         console.log("asldfkjlasdkjf",req.query)
         const userId = req.session.user
 
+        console.log("this is amount", amount)
+        console.log("this is discountPerProduct", discountPerProduct)
         let quantityToNumber = Number(quantity)
 
         console.log("quaertity", typeof quantityToNumber)
@@ -478,10 +480,10 @@ const deleteOrder = async(req,res)=>{
        
         const productUpdateQuantity = await Product.updateOne({_id:productId,"specification._id":specObjectId},{$inc:{"specification.$.quantity":quantityToNumber}},{new:true})
 
-        console.log("asdfaskljdfojk",productUpdateQuantity)
         
-        const convertAmount = Number(amount)
+        const convertAmount = Number(amount);
         
+        console.log("asdfaskljdfojk",convertAmount)
 
         const order = await Order.updateOne(
             { _id: orderId, "products.productId": productId },

@@ -293,7 +293,9 @@ const addOrderDetails = async (req, res) => {
             couponCode,
             paymentMethod,
             items,
-            shippingCharge
+            shippingCharge,
+            originalDiscount,
+            couponDiscount
         } = req.body;
 
         console.log("Request Body:", req.body);
@@ -371,6 +373,7 @@ const addOrderDetails = async (req, res) => {
                     quantity: item.quantity,
                     price: item.price,
                     totalPrice: item.totalPrice || item.price * item.quantity,
+                    productoffer: item.discountPriceElements
                 };
             })
         );
@@ -435,10 +438,12 @@ const addOrderDetails = async (req, res) => {
             payableAmount,
             paymentMethod: finalPaymentMethod,
             paymentStatus,
-            offerAndCouponAmount: totalDiscount || 0,
+            couponAndOfferTotal: totalDiscount || 0,
             couponId: couponId ? new mongoose.Types.ObjectId(couponId) : null,
             couponCode: couponCode || null,
-            shippingCharge: shippingCharge
+            shippingCharge: shippingCharge,
+            offerAmount: originalDiscount,
+            CouponAmount: couponDiscount
         });
 
         await newOrder.save();

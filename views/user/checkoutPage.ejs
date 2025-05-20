@@ -448,16 +448,18 @@
                           alt="<%= item.productId.name %>"
                         />
                       </div>
+                      
                     </td>
                     <td class="column-2"><%= item.productId.productName %></td>
                     <input type="hidden" value="<%= item.productId._id%>" />
                     
-                    <input type="hidden" id="discountPriceforThisProduct" value="<%= item.discountPriceforThisProduct%>">
                     
                     <input type="hidden" id="discountId" value="<%= item.offerApplied%>">
                     <td class="column-3"><%= item.quantity %></td>
                     <td class="column-4">₹ <%= item.unitPrice %></td>
                     <td class="column-5">₹ <%= item.totalPrice %></td>
+                    <input type="hidden"  id="discountPriceforThisProduct" value="<%= item.discountPriceforThisProduct%>">
+                    
                   </tr>
                   <% }); %>
                 </table>
@@ -871,12 +873,13 @@
   const cancelCouponBtn = document.getElementById("cancelCoupon");
   const placeOrderButton = document.querySelector("button.flex-c-m.stext-101.cl0.size-116");
   const cartIdForApplyCoupon = document.getElementById("cartIdForApplyCoupon").value;
-  
+  const discountPriceforThisProduct = document.getElementById("discountPriceforThisProduct").value
   // Get all available coupon elements
   const couponElements = document.querySelectorAll('[id^="coupon-"]');
   
   // Check if any product has a discount already applied
   const discountPriceElements = document.querySelectorAll('#discountPriceforThisProduct');
+  console.log("asdfasdf",discountPriceElements)
   const discountIdElements = document.querySelectorAll('#discountId');
   
   // ========== CALCULATE INITIAL PRODUCT DISCOUNTS ==========
@@ -912,11 +915,16 @@
 function calculateTotals() {
   // Get all cart items
   const itemRows = document.querySelectorAll(".table_row");
+  console.log("THis is roew sd", itemRows)
   subtotal = 0;
   cartItems = [];
 
   itemRows.forEach((row) => {
+
+    console.log("this is row in the itemRows", row)
     // Get the hidden product ID field
+    const discountPriceElements = row.querySelector('#discountPriceforThisProduct').value;
+    console.log("dklsjf", discountPriceElements)
     const productIdInput = row.querySelector('input[type="hidden"]');
     if (!productIdInput) {
       console.error("Product ID input not found for a cart item");
@@ -928,6 +936,9 @@ function calculateTotals() {
     const priceElement = row.querySelector(".column-4");
     const totalPriceElement = row.querySelector(".column-5");
 
+    console.log("quantityElement", quantityElement)
+    console.log("priceElement", priceElement)
+    console.log("totalPriceElement", totalPriceElement)
     if (!quantityElement || !priceElement || !totalPriceElement) {
       console.error("Required element missing for cart item");
       return; // Skip this item
@@ -955,6 +966,7 @@ function calculateTotals() {
       quantity,
       price: unitPrice,
       totalPrice,
+      discountPriceElements
     });
   });
 
@@ -1241,7 +1253,9 @@ if (paymentMethodRadio.id === "payment1") {
         shippingCharge
       };
 
-      console.log("dsjfjsasdf", orderData)
+
+
+      console.log("dsjfjsasasdfdf", orderData)
 
       submitOrder(orderData);
     });

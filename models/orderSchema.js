@@ -39,6 +39,10 @@ const orderSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Offer"
       },
+      productoffer:{
+        type:Number,
+        default:0
+    },
       status:{
         type: String,
         default: "Ordered",
@@ -77,7 +81,7 @@ const orderSchema = new mongoose.Schema({
         enum: ['pending', 'paid', 'failed','success'], 
         default: 'pending' 
     },
-    offerAndCouponAmount:{
+    CouponAmount:{
         type:Number,
         default:0
     },

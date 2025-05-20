@@ -410,8 +410,16 @@
                     <div class="order-items p-3 mb-4">
                         <h2 class="fs-30 text-warning mb-4">Order Items</h2>
                         
+						<%
+  const couponAmount = orderData.CouponAmount || 0;
+  const productCount = orderData.products.length || 1;
+  const discountPerProduct = couponAmount / productCount;
+  %>
+  console.log("<%= discountPerProduct%>")
                         <!-- Product 1 -->
                         <% orderData.products.forEach(product => { %>
+							 <% const discountedPrice = product.totalPrice - discountPerProduct;%>
+							 
 							<div class="product-card p-3">
 								<div class="row align-items-center">
 									<div class="col-md-2">
@@ -427,24 +435,30 @@
 										<p class="mb-1">Quantity: <%= product.quantity %></p>
 										<p class="mb-1">Unit Price: ₹<%= product.price.toLocaleString() %></p>
 										<p class="fw-bold">Total Price: ₹<%= product.totalPrice.toLocaleString() %></p>
+										 <% if (product.productoffer > 0) { %>
+          <p class="text-success fw-semibold">You saved: ₹<%= product.productoffer.toLocaleString() %></p>
+        <% } %>
 									</div>
 									<div class="col-md-2 text-end d-flex flex-column align-items-end gap-2">
 										<button 
-										  class="cancel-btn btn btn-danger w-100"
-										  onclick="cancelOrder(
-											'<%= product.productId._id %>', 
-											'<%= orderData._id %>', 
-											'<%= product.specId %>', 
-											'<%= product.quantity %>', 
-											'<%= product._id %>', 
-											'<%= product.totalPrice %>', 
-											'<%= orderData.userId %>'
-										  )" 
-										  <%= product.status === "Cancelled" || product.status === "Return Requested" ? "disabled" : "" || product.status === "Return Approved" ? "disabled" : "" || orderData.status === "Delivered" ? "disabled" : "" || orderData.status === "Cancelled" ? "disabled" : "" || orderData.paymentStatus === "pending" ? "disabled" : ""%>
-										>
-										  Cancel
-										</button>
-									  
+  class="cancel-btn btn btn-danger w-100"
+  onclick="cancelOrder(
+    '<%= product.productId._id %>', 
+    '<%= orderData._id %>', 
+    '<%= product.specId %>', 
+    '<%= product.quantity %>', 
+    '<%= product._id %>', 
+    '<%= product.totalPrice %>', 
+    '<%= orderData.userId %>',
+	'<%= discountPerProduct%>'
+  )"
+  
+  <%= product.status === "Cancelled" || product.status === "Return Requested" ? "disabled" : "" || product.status === "Return Approved" ? "disabled" : "" || orderData.status === "Delivered" ? "disabled" : "" || orderData.status === "Cancelled" ? "disabled" : "" || orderData.paymentStatus === "pending" ? "disabled" : ""%>
+>
+  Cancel
+</button>
+
+									  <input type="hidden" id="couponAmout" value="<%= orderData.CouponAmount.toLocaleString()%>">
 										<% if (orderData.status === "Delivered") { %>
 										  <button 
 											class="return-btn btn btn-success w-100"
@@ -471,6 +485,8 @@
                         
                        
     
+
+
                     <!-- Shipping Information -->
                     <div class="mb-4">
                         <h2 class="fs-26 fw-bold mb-3">Shipping Information</h2>
@@ -488,11 +504,13 @@
                         <h2 class="fs-26 fw-bold mb-3">Order Summary</h2>
                         <div class="d-flex justify-content-between mb-2">
                             <span>Subtotal</span>
-                            <span>₹<%= (orderData.payableAmount + orderData.offerAndCouponAmount).toLocaleString()%></span>
+                            <span>₹<%= (orderData.payableAmount - orderData.shippingCharge).toLocaleString()%></span>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
-                            <span>Total Discount</span>
-                            <span>₹<%= orderData.offerAndCouponAmount.toLocaleString()%></span>
+							<span>Coupon Discount</span>
+							<%if(orderData.CouponAmount > 0){%>
+                            <span>₹<%= orderData.CouponAmount.toLocaleString()%></span>
+							<%}%>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span>Shipping Charge</span>
@@ -724,7 +742,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	<script>
-	function cancelOrder(productId, orderId, specId, quantity, id, amount, userId) {
+	function cancelOrder(productId, orderId, specId, quantity, id, amount, userId, discountPerProduct) {
+		console.log("amount", amount)
+		console.log("amousefwernt", discountPerProduct)
+		const finalPricetoGiveUser = amount - discountPerProduct;
+		console.log("safad", finalPricetoGiveUser)
   Swal.fire({
     title: 'Are you sure?',
     text: "Do you want to cancel this order?",
@@ -758,7 +780,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       }).then((reasonResult) => {
         if (reasonResult.isConfirmed) {
           // Send cancellation request with reason as query parameter
-          fetch(`/deleteOrder?orderId=${orderId}&productId=${productId}&specId=${specId}&quantity=${quantity}&id=${id}&amount=${amount}&userId=${userId}&reason=${encodeURIComponent(reasonResult.value)}`, {
+          fetch(`/deleteOrder?orderId=${orderId}&productId=${productId}&specId=${specId}&quantity=${quantity}&id=${id}&amount=${finalPricetoGiveUser}&discountPerProduct=${discountPerProduct}&userId=${userId}&reason=${encodeURIComponent(reasonResult.value)}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'
@@ -931,6 +953,7 @@ function returnRequest(productId, orderId, specId, quantity, id, amount, userId)
 				}
 				
 				let totalAmountPrice = document.getElementById("totalAmountPrice").value
+				console.log("total amount", totalAmountPrice)
 				const orderId = orderIdElement.value; // Get Order ID
 				console.log("Cancelling Order ID:", orderId);
 				console.log("hgfgfc", totalAmountPrice);
