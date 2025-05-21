@@ -772,7 +772,7 @@ const generateInvoice = async (req, res) => {
         let itemY = itemsTableY + 30;
         
         orderData.products.forEach((item, index) => {
-            const productName = item.productId.productName || 'Product';
+            const productName = item?.productId?.productName || 'Product';
             const variantInfo = item.specId ? `(${item.specId.color || ''} ${item.specId.size || ''})`.trim() : '';
             const displayName = variantInfo ? `${productName} ${variantInfo}` : productName;
             
@@ -826,7 +826,7 @@ const generateInvoice = async (req, res) => {
            .text(`₹${orderData.totalAmount.toLocaleString()}`, 450, summaryY, { width: 80, align: 'right' });
         
         doc.text('Discount:', 380, summaryY + 20)
-           .text(`₹${orderData.offerAndCouponAmount.toLocaleString()}`, 450, summaryY + 20, { width: 80, align: 'right' });
+           .text(`₹${orderData?.CouponAmount?.toLocaleString()}`, 450, summaryY + 20, { width: 80, align: 'right' });
         
         doc.text('Shipping:', 380, summaryY + 40)
            .text('₹0', 450, summaryY + 40, { width: 80, align: 'right' });

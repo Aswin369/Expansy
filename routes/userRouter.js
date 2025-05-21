@@ -10,6 +10,7 @@ const shoppingCartController = require('../controllers/user/shoppingCartControll
 const wishListController = require("../controllers/user/whishListController.js")
 const palceOderController = require("../controllers/user/placeOderController.js")
 
+
 router.get("/",userController.loadHomepage)
 router.get("/signup",userController.loadsignup)
 router.post("/signup",userController.signup)

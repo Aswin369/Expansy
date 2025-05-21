@@ -281,12 +281,11 @@
                     <a href="#wallet" class="list-group-item list-group-item-action" data-bs-toggle="list">
                          Wallet
                     </a>
+					<%if(!data.googleId){%>
                     <a href="#forgot-password" class="list-group-item list-group-item-action" data-bs-toggle="list">
                          Change Password
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action text-danger">
-                         Logout
-                    </a>
+                    <%}%>
                 </div>
             </div>
 
@@ -757,6 +756,7 @@
 					
 
                     <!-- Forgot Password -->
+					 <%if(!data.googleId){%>
                     <div class="tab-pane fade" id="forgot-password">
 						<div class="card">
 							<div class="card-header">
@@ -779,6 +779,7 @@
 							</div>
 						</div>
 					</div>
+					<%}%>
 					
                 </div>
             </div>

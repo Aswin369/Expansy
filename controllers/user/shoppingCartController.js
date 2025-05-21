@@ -24,10 +24,10 @@ const getShoppingCart = async (req, res) => {
         if (!cartUser || cartUser.items.length === 0) {
             return res.render("shoppingCart", { cartData: { items: [] }, user: userId });
         }
-
+           
         const populatedCartItems = await Promise.all(
             cartUser.items.map(async (item) => {
-                const product = item.productId;
+                const product = item?.productId;
                 if (!product) return item;
                 const specification = product.specification.find(spec => spec._id.equals(item.specId));
 
@@ -122,6 +122,7 @@ const productAddToCart = async (req, res) => {
                     offerApplied
                 });
             }
+            userCart.items = userCart.items.filter(item => item !== null);
             await userCart.save();
         } else {
             
@@ -137,6 +138,7 @@ const productAddToCart = async (req, res) => {
                     offerApplied
                 }]
             });
+            
             await newCart.save();
         }
 
